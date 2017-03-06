@@ -1,0 +1,170 @@
+
+/*---------style entête--------*/
+
+header{
+    background-color: white;
+    padding-bottom: 0px;
+    
+}
+
+
+ header h3{
+    color:slategray;
+     font-size: 20px;
+     font-family: fantasy;
+     font-style: italic;
+     margin-left: 20px;
+     margin-right: 20px;
+}
+
+header img
+{
+
+ width: 30%;   
+}
+
+
+/*-----------style corps de page----------------*/
+body
+{
+   background-image: url("../image/fond5.jpg");
+    
+   
+}
+
+
+/*------------style pied de page--------------*/
+footer{
+    background-color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+    /*boutons pied de page*/ 
+   .btn-default{
+     width: 55px;
+      height: 55px;
+     
+     background-color:#5bc0de;
+
+    }
+.fa{
+    margin-top: 5px;
+}
+
+/*--------------style page home--------------*/
+
+.home{
+    margin-top:40px;
+    margin-left: 100px;
+    margin-right:0px;
+    margin-bottom:40px;
+}
+
+.article{
+    background-color: white;
+    box-shadow: 6px 6px 10px black;
+    padding-bottom: 30px;
+    
+    
+}
+
+.introduce{
+    background-color: white;  
+    margin-top: 20px;
+    box-shadow: 6px 6px 10px black;
+    text-align: center;
+    
+}
+
+.date{
+    background-color: #5bc0de;
+    color: white;
+    
+    margin-top: 20px;
+    
+}
+
+.date h4{
+    font-size: 15px;
+}
+
+
+.texte{
+    text-align: justify;
+    
+    
+    margin-bottom: 10px;
+    border-bottom: 1px solid grey;
+    padding-bottom 20px;
+}
+
+
+/*style menu de navigation*/
+
+.navbar{
+    
+    margin-bottom: 0px;
+       
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+#menu a{
+    color: blue;
+   
+    text-align: center;
+       
+}
+
+img{
+    width:100%;
+    margin-bottom: 20px;
+}
+.row .article{
+    margin-top: 20px;
+}
+
+/* Styles pour les smartphones */
+
+         @media (max-width: 768px) {
+        .date{
+         
+            color: white;
+            margin-top: 30px;
+        } 
+          .home{
+    
+    margin-left: 40px;
+    margin-right:40px;
+    margin-bottom:40px;
+}        
+        
+    
+      }
+        
+
+      /* Styles pour les tablettes */
+      @media (min-width: 768px) {
+                   .home{
+    
+    margin-left: 40px;
+    margin-right:40px;
+    margin-bottom:40px;
+          
+        
+      }
+     }      
+          .introduce h1{
+    color: #5bc0de;
+    text-align: center; 
+    
+              margin-bottom: 20px;
+          }
