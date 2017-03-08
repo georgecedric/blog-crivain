@@ -62,7 +62,16 @@ class Article
     }
 
     public function setDate($date) {
-        $this->date = $date;
+             
+        
+if (setlocale(LC_TIME, 'fr_FR') == '') {
+    setlocale(LC_TIME, 'FRA');  //correction problème pour windows
+    $format_jour = '%#d';
+} else {
+    $format_jour = '%e';
+}
+$this->date = strftime(" $format_jour %B %Y", strtotime($date)) ;
+
         return $this;
     }
 }

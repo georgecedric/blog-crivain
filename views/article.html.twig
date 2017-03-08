@@ -1,16 +1,20 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ article.title }} {% endblock %}
 
 {% block content %}
+<div class="row commentaire">
 <p>
-    <h2>{{ article.title }}</h2>
+    <h2><a  href="{{ path('home') }}">{{ article.title }}</a></h2>
     <p>{{ article.content }}</p>
     <h3>Comments</h3>
     {% for comment in comments %}
         <strong>{{ comment.author }}</strong> à publié : {{ comment.content }} le {{ comment.date }}<br>
+    
     {% else %}
         No comments yet.
     {% endfor %}
+    
 </p>
+        </div>
 {% endblock %}

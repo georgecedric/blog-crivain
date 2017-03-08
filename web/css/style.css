@@ -44,8 +44,6 @@ footer{
    .btn-default{
      width: 55px;
       height: 55px;
-     
-     background-color:#5bc0de;
 
     }
 .fa{
@@ -88,7 +86,9 @@ footer{
 .date h4{
     font-size: 15px;
 }
-
+.date{
+    margin-top: 65px;
+}
 
 .texte{
     text-align: justify;
@@ -168,3 +168,14 @@ img{
     
               margin-bottom: 20px;
           }
+/*--------------style page article--------------*/
+.commentaire{
+    background-color: white;  
+    margin: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 20px;
+    box-shadow: 6px 6px 10px black;
+    
+    
+}

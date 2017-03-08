@@ -19,7 +19,8 @@
             {% for article in articles %}
             <article class="row" >
                 <div class="col-sm-2 date">
-                <h4>{{ article.date}}</h4>
+                    <h5>posté le:</br></h5><h4>{{ article.date}}</h4>
+                
                 </div>
             <div class="col-sm-10 texte">
                 <h2>{{ article.title }}</h2>
@@ -36,7 +37,7 @@
             <h1> Qui suis-je?</h1>
             <img src="../web/image/jf.jpeg"  alt="jf" />
             <p> hello! moi c'est Jean, écrivain et acteur, je désire partager avec vous l'écriture de mon nouveau roman</p>
-            <p><a class=" btn btn-info btn-sm" role="button">En savoir plus <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+            <p><a class=" btn btn-info btn-sm" href="{{ path('introduce')}}" role="button">En savoir plus <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
         </div>
     </div>
         
