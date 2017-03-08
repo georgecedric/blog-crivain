@@ -11,10 +11,10 @@ class Comment
      */
     private $id;
 
-    /**
+   /**
      * Comment author.
      *
-     * @var string
+     * @var \BlogJF\Domain\User
      */
     private $author;
     
@@ -52,11 +52,12 @@ class Comment
         return $this->author;
     }
 
-    public function setAuthor($author) {
+    public function setAuthor(User $author) {
         $this->author = $author;
         return $this;
     }
-         public function getDate() {
+    
+    public function getDate() {
         return $this->date;
     }
 

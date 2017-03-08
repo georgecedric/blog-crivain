@@ -7,12 +7,21 @@ use BlogJF\Domain\Comment;
 class CommentDAO extends DAO 
 {
     /**
-     * @var \BlogJF\DAO\ArticleDAO
+     * @var \MicroCMS\DAO\ArticleDAO
      */
     private $articleDAO;
 
+    /**
+     * @var \MicroCMS\DAO\UserDAO
+     */
+    private $userDAO;
+
     public function setArticleDAO(ArticleDAO $articleDAO) {
         $this->articleDAO = $articleDAO;
+    }
+
+    public function setUserDAO(UserDAO $userDAO) {
+        $this->userDAO = $userDAO;
     }
 
     /**
@@ -28,7 +37,7 @@ class CommentDAO extends DAO
 
         // art_id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select com_id, com_content, com_author,com_date from comment where art_id=? order by com_id";
+        $sql = "select com_id, com_content, com_date, usr_id from comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -54,13 +63,18 @@ class CommentDAO extends DAO
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
         $comment->setDate($row['com_date']);
-        $comment->setAuthor($row['com_author']);
 
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['art_id'];
             $article = $this->articleDAO->find($articleId);
             $comment->setArticle($article);
+        }
+        if (array_key_exists('usr_id', $row)) {
+            // Find and set the associated author
+            $userId = $row['usr_id'];
+            $user = $this->userDAO->find($userId);
+            $comment->setAuthor($user);
         }
         
         return $comment;
