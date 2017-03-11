@@ -179,3 +179,21 @@ img{
     
     
 }
+.commentaire .comment{
+    background-color: darkgrey;  
+    margin: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 20px;
+    box-shadow: 6px 6px 10px black;
+    
+    
+}
+
+.reponse{
+        background-color: white;  
+    margin: 20px;
+    Margin-left:100px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}

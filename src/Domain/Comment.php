@@ -38,6 +38,8 @@ class Comment
      * @var \Blogjf\Domain\Article
      */
     private $article;
+    
+
 
     public function getId() {
         return $this->id;
@@ -83,4 +85,5 @@ class Comment
         $this->article = $article;
         return $this;
     }
+
 }

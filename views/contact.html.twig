@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Qui suis je?{% endblock %}
+
+{% block content %}
+
+
+
+<div class="row message">
+        <section class="col-sm-8">
+          <form class="MessageArray">
+            <h4><span class="label label-default">Si vous voulez me laisser un message</span></h4>
+            <h4>Comment m'avez-vous trouvé ?</h4>
+            <fieldset>
+              <div class="radio">
+                <label for="ami" class="radio">
+                  <input type="radio" name="origine" value="ami" id="ami">
+                  Par un ami 
+                </label>
+              </div>
+              <div class="radio">
+                <label for="web" class="radio">
+                  <input type="radio" name="origine" value="web" id="web">
+                  Sur le web 
+                </label>
+              </div>
+              <div class="radio">
+                <label for="hasard" class="radio">
+                  <input type="radio" name="origine" value="hasard" id="hasard">
+                  Par hasard 
+                </label>
+              </div>
+              <div class="radio">
+                <label for="autre" class="radio">
+                  <input type="radio" name="origine" value="autre" id="autre">
+                  Autre... 
+                </label>
+              </div>
+                
+                <label for="textarea">Votre titre :</label>
+                <textarea id="textarea" class="form-control" rows="1"></textarea></br>
+              <label for="textarea">Votre message :</label>
+                <textarea id="textarea" class="form-control" rows="4"></textarea></br>
+              
+
+                
+                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
+            </fieldset>
+          </form>
+        </section>
+        <section class="col-sm-4">
+          <address class="thumbnail">
+            <p>Vous pouvez me contacter à cette adresse :</p>
+            <strong>Tigrou Alfred</strong><br>
+              Allée des fauves<br>
+              28645 Félins-sur-Loire<br>
+          </address>
+        </section>
+      </div>
+{% endblock %}

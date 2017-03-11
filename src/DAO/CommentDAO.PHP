@@ -15,6 +15,8 @@ class CommentDAO extends DAO
      * @var \MicroCMS\DAO\UserDAO
      */
     private $userDAO;
+    
+
 
     public function setArticleDAO(ArticleDAO $articleDAO) {
         $this->articleDAO = $articleDAO;
@@ -22,6 +24,39 @@ class CommentDAO extends DAO
 
     public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
+  }
+     /**
+     * Return a list of all comments, sorted by date (most recent first).
+     *
+     * @return array A list of all articles.
+     */
+    public function findAll() {
+        $sql = "select * from comment order by com_id desc";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // Convert query result to an array of domain objects
+        $comments = array();
+        foreach ($result as $row) {
+            $comId = $row['com_id'];
+            $comments[$comId] = $this->buildDomainObject($row);
+        }
+        return $comments;
+    }
+      /**
+     * Returns an article matching the supplied id.
+     *
+     * @param integer $id The article id.
+     *
+     * @return \MicroCMS\Domain\Article|throws an exception if no matching article is found
+     */
+    public function find($id) {
+        $sql = "select * from comment where com_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No article matching id " . $id);
     }
 
     /**

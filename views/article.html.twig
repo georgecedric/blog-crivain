@@ -5,20 +5,29 @@
 {% block content %}
 <div class="row commentaire">
 <p>
+
     <h2><a  href="{{ path('home') }}">{{ article.title }}</a></h2>
-    <p>{{ article.content }}</p>
-    <h3>Comments</h3>
+    <p>{{ article.content|raw }}</p>
+    <div class=" comment">
+    <h3>Commentaire</h3>
+        
     {% for comment in comments %}
-        <strong>{{ comment.author.username }}</strong> à publié : {{ comment.content }} le {{ comment.date }}<br>
-    
-    {% else %}
-        No comments yet.
+  
+                <strong>{{ comment.author.username }}</strong> à publié  le {{ comment.date }}:<br>
+                {{ comment.content }}<br>
+
+{% else %}
+          
+        Pas encore de commentaire.
+       
     {% endfor %}
-    <h3>Add a comment</h3>
+    
+    <h3>voulez vous ajouter un commentaire?</h3>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         Soon!>
     {% else %}
         <a href="{{ path('login') }} ">Log in</a> to add comments.
     {% endif %}
-</p>
+</p></div></div>
 {% endblock %}
+ 

@@ -37,9 +37,11 @@ $app['dao.article'] = function ($app) {
 $app['dao.user'] = function ($app) {
     return new BlogJF\DAO\UserDAO($app['db']);
 };
+
 $app['dao.comment'] = function ($app) {
     $commentDAO = new BlogJF\DAO\CommentDAO($app['db']);
     $commentDAO->setArticleDAO($app['dao.article']);
     $commentDAO->setUserDAO($app['dao.user']);
+    
     return $commentDAO;
 };
