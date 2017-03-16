@@ -25,40 +25,8 @@ class CommentDAO extends DAO
     public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
   }
-     /**
-     * Return a list of all comments, sorted by date (most recent first).
-     *
-     * @return array A list of all articles.
-     */
-    public function findAll() {
-        $sql = "select * from comment order by com_id desc";
-        $result = $this->getDb()->fetchAll($sql);
-
-        // Convert query result to an array of domain objects
-        $comments = array();
-        foreach ($result as $row) {
-            $comId = $row['com_id'];
-            $comments[$comId] = $this->buildDomainObject($row);
-        }
-        return $comments;
-    }
-      /**
-     * Returns an article matching the supplied id.
-     *
-     * @param integer $id The article id.
-     *
-     * @return \MicroCMS\Domain\Article|throws an exception if no matching article is found
-     */
-    public function find($id) {
-        $sql = "select * from comment where com_id=?";
-        $row = $this->getDb()->fetchAssoc($sql, array($id));
-
-        if ($row)
-            return $this->buildDomainObject($row);
-        else
-            throw new \Exception("No article matching id " . $id);
-    }
-
+    
+    
     /**
      * Return a list of all comments for an article, sorted by date (most recent last).
      *
@@ -91,24 +59,7 @@ class CommentDAO extends DAO
      *
      * @param \BlogJf\Domain\Comment $comment The comment to save
      */
-    public function save(Comment $comment) {
-        $commentData = array(
-            'art_id' => $comment->getArticle()->getId(),
-            'usr_id' => $comment->getAuthor()->getId(),
-            'com_content' => $comment->getContent()
-            );
-
-        if ($comment->getId()) {
-            // The comment has already been saved : update it
-            $this->getDb()->update('comment', $commentData, array('com_id' => $comment->getId()));
-        } else {
-            // The comment has never been saved : insert it
-            $this->getDb()->insert('comment', $commentData);
-            // Get the id of the newly created comment and set it on the entity.
-            $id = $this->getDb()->lastInsertId();
-            $comment->setId($id);
-        }
-    }
+    
 
     /**
      * Creates an Comment object based on a DB row.

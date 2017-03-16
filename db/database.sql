@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:8889
--- Généré le :  Lun 06 Mars 2017 à 17:25
+-- Généré le :  Jeu 16 Mars 2017 à 07:42
 -- Version du serveur :  5.6.35
 -- Version de PHP :  7.1.1
 
@@ -44,19 +44,72 @@ INSERT INTO `articles` (`art_id`, `art_title`, `art_content`, `art_date`) VALUES
 
 CREATE TABLE `comment` (
   `com_id` int(11) NOT NULL,
-  `com_author` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `com_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `com_content` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `art_id` int(11) NOT NULL
+  `usr_id` int(11) NOT NULL,
+  `art_id` int(11) NOT NULL,
+  `rep_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 --
 -- Contenu de la table `comment`
 --
 
-INSERT INTO `comment` (`com_id`, `com_author`, `com_date`, `com_content`, `art_id`) VALUES
-(1, 'John Doe', '2017-03-06 14:21:06', 'Great! Keep up the good work.', 1),
-(2, 'Ann Yone', '2017-03-06 14:21:06', 'Thank you, I\'ll try my best.', 1);
+INSERT INTO `comment` (`com_id`, `com_date`, `com_content`, `usr_id`, `art_id`, `rep_id`) VALUES
+(1, '2017-03-06 14:21:06', 'Great! Keep up the good work.', 1, 3, 0),
+(2, '2017-03-06 14:21:06', 'Thank you, I\'ll try my best.', 2, 1, 0),
+(3, '2017-03-09 18:53:17', 'très bon texte j\'adore', 1, 1, 0),
+(4, '2017-03-11 11:48:07', 'bravo pour votre texte', 1, 1, 0),
+(5, '2017-03-13 18:28:04', 'trop bien', 2, 3, 0),
+(6, '2017-03-13 18:31:40', 'trop bien', 1, 3, 0),
+(7, '2017-03-13 20:22:50', 'je suis et reste fan', 1, 1, 0),
+(8, '2017-03-14 14:33:56', 'salut', 1, 1, 0),
+(9, '2017-03-14 17:32:44', 'moi', 3, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reponse`
+--
+
+CREATE TABLE `reponse` (
+  `rep_id` int(11) NOT NULL,
+  `rep_content` text NOT NULL,
+  `rep_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usr_id` int(11) NOT NULL,
+  `com_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Contenu de la table `reponse`
+--
+
+INSERT INTO `reponse` (`rep_id`, `rep_content`, `rep_date`, `usr_id`, `com_id`) VALUES
+(1, 'comment vas tu?', '2017-03-08 15:16:19', 1, 1),
+(2, 'waouhhhh trop bien et toi?', '2017-03-08 15:16:19', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `usr_id` int(11) NOT NULL,
+  `usr_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `usr_password` varchar(88) COLLATE utf8_unicode_ci NOT NULL,
+  `usr_salt` varchar(23) COLLATE utf8_unicode_ci NOT NULL,
+  `usr_role` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`usr_id`, `usr_name`, `usr_password`, `usr_salt`, `usr_role`) VALUES
+(1, 'JohnDoe', '$2y$13$F9v8pl5u5WMrCorP9MLyJeyIsOLj.0/xqKd/hqa5440kyeB7FQ8te', 'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER'),
+(2, 'JaneDoe', '$2y$13$qOvvtnceX.TjmiFn4c4vFe.hYlIVXHSPHfInEG21D99QZ6/LM70xa', 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER'),
+(3, 'admin', '$2y$13$A8MQM2ZNOi99EW.ML7srhOJsCaybSbexAj/0yXrJs4gQ/2BqMMW2K', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
 
 --
 -- Index pour les tables exportées
@@ -76,6 +129,12 @@ ALTER TABLE `comment`
   ADD KEY `fk_com_art` (`art_id`);
 
 --
+-- Index pour la table `reponse`
+--
+ALTER TABLE `reponse`
+  ADD PRIMARY KEY (`rep_id`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -88,4 +147,9 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `reponse`
+--
+ALTER TABLE `reponse`
+  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;

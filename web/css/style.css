@@ -179,6 +179,7 @@ img{
     
     
 }
+
 .commentaire .comment{
     background-color: darkgrey;  
     margin: 20px;
@@ -190,6 +191,12 @@ img{
     
 }
 
+.commentaire h2{
+    background-color: #5bc0de;  
+    
+    
+    
+}
 .reponse{
         background-color: white;  
     margin: 20px;
@@ -197,3 +204,5 @@ img{
     padding-left: 20px;
     padding-bottom: 20px;
 }
+
+
