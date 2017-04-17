@@ -20,7 +20,7 @@ header{
 header img
 {
 
- width: 30%;   
+ width: 20%;   
 }
 
 
@@ -42,12 +42,12 @@ footer{
 
     /*boutons pied de page*/ 
    .btn-default{
-     width: 55px;
-      height: 55px;
+     width: 45px;
+      height: 45px;
 
     }
 .fa{
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 /*--------------style page home--------------*/
@@ -79,16 +79,21 @@ footer{
     background-color: #5bc0de;
     color: white;
     
-    margin-top: 20px;
-    
+    margin-top: 110px;
+    margin-left: -20px;
+    border-left: 3px solid #16a0bd;
+    border-bottom: 3px solid #16a0bd;
 }
 
 .date h4{
     font-size: 15px;
+    padding-left: 20px;
 }
-.date{
-    margin-top: 65px;
+.date h5{
+    
+    padding-left: 20px;
 }
+
 
 .texte{
     text-align: justify;
@@ -146,7 +151,11 @@ img{
     margin-right:40px;
     margin-bottom:40px;
 }        
-        
+  header img
+{
+
+ width: 40%;   
+}      
     
       }
         
@@ -161,7 +170,8 @@ img{
           
         
       }
-     }      
+     }   
+
           .introduce h1{
     color: #5bc0de;
     text-align: center; 
@@ -181,28 +191,36 @@ img{
 }
 
 .commentaire .comment{
-    background-color: darkgrey;  
+    background-color: white;  
+    border: 2px, solid, black;
     margin: 20px;
     margin-left: 100px;
     margin-right: 100px;
     padding: 20px;
-    box-shadow: 6px 6px 10px black;
+    box-shadow: 6px 6px 10px darkgrey;
     
     
 }
 
 .commentaire h2{
-    background-color: #5bc0de;  
+    background-color: #5bc0de; 
+    padding:10px;
+    color: white;
+    margin-left: -40px;
     
     
     
 }
 .reponse{
-        background-color: white;  
+    background-color: white;
+    border: 2px, solid, black;
     margin: 20px;
     Margin-left:100px;
-    padding-left: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
+    box-shadow: 6px 6px 10px darkgrey;
 }
 
-
+#errorPanel {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}

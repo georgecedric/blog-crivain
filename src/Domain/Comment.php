@@ -31,6 +31,12 @@ class Comment
      * @var integer
      */
     private $content;
+    
+   
+    
+
+
+ 
 
     /**
      * Associated article.
@@ -38,7 +44,11 @@ class Comment
      * @var \Blogjf\Domain\Article
      */
     private $article;
+
     
+    private $compte;
+    private $reponse= array();
+
 
 
     public function getId() {
@@ -54,7 +64,7 @@ class Comment
         return $this->author;
     }
 
-    public function setAuthor(User $author) {
+    public function setAuthor($author) {
         $this->author = $author;
         return $this;
     }
@@ -76,14 +86,30 @@ class Comment
         $this->content = $content;
         return $this;
     }
+    
+            public function getCompte() {
+        return $this->compte;
+    }
 
+    public function setCompte($compte) {
+        $this->compte = $compte;
+        return $this;
+    }
+    
     public function getArticle() {
         return $this->article;
     }
-
-    public function setArticle(Article $article) {
+     public function setArticle(Article $article) {
         $this->article = $article;
         return $this;
     }
+public function getReponse() {
+        return $this->reponse;
+    }
 
+    public function addReponse(Reply $reply) {
+    
+     $this->reponse[] = $reply;
+       return $this; 
+    }
 }

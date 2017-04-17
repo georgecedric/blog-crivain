@@ -1,3 +1,6 @@
+
+
+
 {% extends "layout.html.twig" %}
 
 {% block title %}{{ article.title }} {% endblock %}
@@ -9,21 +12,101 @@
     <h2>{{ article.title }}</h2>
     <p>{{ article.content}}</p>
   
-    <div class=" comment">
+    
     <h3>Commentaire</h3>
         
     {% for comment in comments %}
-  
-                <strong>{{ comment.author.username }}</strong> à publié  le {{ comment.date }}:<br>
+  <div class=" comment ">
+    
+         
+        
+                <strong> {{ comment.id}}   {{ comment.author}}     </strong> à publié  le {{ comment.date }}:<br>
                 {{ comment.content }}<br>
-        {{ comment.id}}
-            
+<div class=" reponse "> 
+      {% for reply in comment.reponse %}
+  
+         
+        
+                <strong> {{ reply.id}}   {{ reply.author}}     </strong> à publié  le {{ reply.date }}:<br>
+                {{ reply.content }}<br>
+       
+    
+       
+        
+{% else %}
+          
+        Pas encore de réponse.
+       
+    {% endfor %}
+      </div>
 
+                        
+
+
+                 <p><a class=" col-xs-3" href="{{ path('reply', { 'id': comment.id })  }}" ><span class="glyphicon glyphicon glyphicon-comment "></span>    {{ comment.compte }} réponses </a></p>
+        
+                <p><a class="col-xs-offset-7 col-xs-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': comment.id }) }}" role="button"> lire les réponses  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>   
+      
+                <form name="inscription" method="post" action="{{ path('reply', { 'id': article.id , 'commentid': comment.id })  }}">
+                    
+            
+            <input type="submit" name="valider" value="OK"/>
+                    
+             
+                    
+                    
+        </form>
+   </div>       
+        
 {% else %}
           
         Pas encore de commentaire.
        
     {% endfor %}
- </div> </div>  
+      
+ <div class=" comment">   
+    
+            <h3>Ajouter un commentaire</h3><br>
+    
+        {{ form_start(commentForm) }}
+            <div class="form-group">
+                <p><h4> Entrez votre pseudo</h4></p>
+                {{ form_errors(commentForm.author) }}
+                {{ form_widget(commentForm.author, { 'attr':  {
+                    'rows': '1',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez votre nom et prénom'
+                }}) }}<br>
+                <p><h4>  Entrez votre commentaire ici</h4></p>
+                {{ form_errors(commentForm.content) }}
+                {{ form_widget(commentForm.content, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Exprimez vous ici'
+                }}) }}
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+            </div>
+        {{ form_end(commentForm) }}
+ 
+   </div>         
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+	</p>
+    </form>
+ 
 {% endblock %} 
     

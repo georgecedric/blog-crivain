@@ -21,7 +21,7 @@ class Article
     /**
      * Article content.
      *
-     * @var string
+     * @var 
      */
     private $content;
     /**
@@ -30,6 +30,12 @@ class Article
      * @var datetime
      */
     private $date;
+    /**
+     * Article count.
+     *
+     * @var count;
+     */
+    private $compte;
 
     public function getId() {
         return $this->id;
@@ -46,6 +52,15 @@ class Article
 
     public function setTitle($title) {
         $this->title = $title;
+        return $this;
+    }
+    
+    public function getCompte() {
+        return $this->compte;
+    }
+
+    public function setCompte($compte) {
+        $this->compte = $compte;
         return $this;
     }
 
