@@ -56,6 +56,12 @@ $app['dao.user'] = function ($app) {
     return new BlogJF\DAO\UserDAO($app['db']);
 };
 
+$app['dao.contact'] = function ($app) {
+    return new BlogJF\DAO\ContactDAO($app['db']);
+};
+
+
+
 
 $app['dao.comment'] = function ($app) {
     $commentDAO = new BlogJF\DAO\CommentDAO($app['db']);

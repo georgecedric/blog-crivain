@@ -70,6 +70,15 @@ footer{
 .introduce{
     background-color: white;  
     margin-top: 20px;
+    padding:10px;
+    box-shadow: 6px 6px 10px black;
+    text-align: center;
+    
+}
+
+.connexion{
+    background-color: white;  
+    margin-top: 20px;
     box-shadow: 6px 6px 10px black;
     text-align: center;
     
@@ -202,17 +211,43 @@ img{
     
 }
 
+.initiale  {
+    background-color: #5bc0de;  
+    border: 2px, solid, black;
+    font-size: 30px;
+    color:white;
+    box-shadow: 6px 6px 10px darkgrey;
+  
+    border-radius: 30px;
+    
+}
+
+.reponseinitiale {
+    background-color: skyblue;  
+    border: 2px, solid, black;
+    font-size: 20px;
+    color:white;
+    box-shadow: 6px 6px 10px darkgrey;
+  
+    border-radius: 20px;
+    margin-bottom: 10px;
+    
+}
+
 .commentaire h2{
     background-color: #5bc0de; 
     padding:10px;
     color: white;
     margin-left: -40px;
-    
-    
+    box-shadow: 6px 6px 10px black;
+    margin-right: -25px;
     
 }
+
+
+
 .reponse{
-    background-color: white;
+    background-color: #ececec;
     border: 2px, solid, black;
     margin: 20px;
     Margin-left:100px;
@@ -223,4 +258,11 @@ img{
 #errorPanel {
     padding-top: 30px;
     padding-bottom: 10px;
+}
+
+
+.well {
+   background-image: url("../image/banner.jpeg");
+ background-size: 100% 110%;
+    background-repeat: no-repeat;
 }

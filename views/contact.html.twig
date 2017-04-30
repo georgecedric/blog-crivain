@@ -2,59 +2,50 @@
 
 {% block title %}Qui suis je?{% endblock %}
 
+
+
 {% block content %}
-
-
-
 <div class="row commentaire">
-        <section class="col-sm-8">
-          <form class="MessageArray">
-            <h2><span >Si vous voulez me laisser un message</span></h2>
-            <h4>Comment m'avez-vous trouvé ?</h4>
-            <fieldset>
-              <div class="radio">
-                <label for="ami" class="radio">
-                  <input type="radio" name="origine" value="ami" id="ami">
-                  Par un ami 
-                </label>
-              </div>
-              <div class="radio">
-                <label for="web" class="radio">
-                  <input type="radio" name="origine" value="web" id="web">
-                  Sur le web 
-                </label>
-              </div>
-              <div class="radio">
-                <label for="hasard" class="radio">
-                  <input type="radio" name="origine" value="hasard" id="hasard">
-                  Par hasard 
-                </label>
-              </div>
-              <div class="radio">
-                <label for="autre" class="radio">
-                  <input type="radio" name="origine" value="autre" id="autre">
-                  Autre... 
-                </label>
-              </div>
-                
-                <label for="textarea">Votre titre :</label>
-                <textarea id="textarea" class="form-control" rows="1"></textarea></br>
-              <label for="textarea">Votre message :</label>
-                <textarea id="textarea" class="form-control" rows="4"></textarea></br>
-              
+      <div class=" comment">   
+    
+            <h2>Si vous voulez m'écrire un message, c'est ici</h2><br>
+    
+        {{ form_start(contactForm) }}
+            <div class="form-group">
+                <p><h4> Qui etes vous?</h4></p>
+                {{ form_errors(contactForm.author) }}
+                {{ form_widget(contactForm.author, { 'attr':  {
+                    'rows': '1',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez votre nom et prénom'
+                }}) }}<br>
+          <p><h4> Quel est votre email?</h4></p>
+                {{ form_errors(contactForm.email) }}
+                {{ form_widget(contactForm.email, { 'attr':  {
+                    'rows': '1',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez votre email ici'
+                }}) }}<br>
+        <p><h4> Sujet de votre mesage?</h4></p>
+                {{ form_errors(contactForm.title) }}
+                {{ form_widget(contactForm.title, { 'attr':  {
+                    'rows': '1',
+                    'class': 'form-control',
+                    'placeholder': 'Entrez ici le motif de votre message'
+                }}) }}<br>
+                <p><h4>  Entrez votre message ici</h4></p>
+                {{ form_errors(contactForm.content) }}
+                {{ form_widget(contactForm.content, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Exprimez vous ici'
+                }}) }}
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Envoyer le message" />
+            </div>
+        {{ form_end(contactForm) }}
 
-                
-                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
-            </fieldset>
-          </form>
-        </section>
-        <section class="col-sm-4">
-          <address class="thumbnail">
-            <p>Vous pouvez me contacter à cette adresse :</p>
-            <strong>Tigrou Alfred</strong><br>
-              Allée des fauves<br>
-              28645 Félins-sur-Loire<br>
-          </address>
-        </section>
-      </div>
+   </div>
+</div>
 {% endblock %}

@@ -32,6 +32,13 @@ class Comment
      */
     private $content;
     
+    /**
+     * Comment advert.
+     *
+     * @var integer
+     */
+    private $advert;
+    
    
     
 
@@ -87,6 +94,16 @@ class Comment
         return $this;
     }
     
+    
+    public function getAdvert() {
+        return $this->advert;
+    }
+
+    public function setAdvert($advert) {
+        $this->advert = $advert;
+        return $this;
+    }
+    
             public function getCompte() {
         return $this->compte;
     }
@@ -112,4 +129,5 @@ public function getReponse() {
      $this->reponse[] = $reply;
        return $this; 
     }
+
 }

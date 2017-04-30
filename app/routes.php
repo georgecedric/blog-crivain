@@ -5,16 +5,23 @@ use BlogJF\Domain\Comment;
 use BlogJF\Domain\Article;
 use BlogJF\Domain\Reply;
 use BlogJF\Domain\User;
+use BlogJF\Domain\Contact;
 use BlogJF\Form\Type\CommentType;
 use BlogJF\Form\Type\replyType;
+use BlogJF\Form\Type\AdvertType;
 use BlogJF\Form\Type\ArticleType;
 use BlogJF\Form\Type\UserType;
+use BlogJF\Form\Type\ContactType;
+
+
 
 // Home page
 $app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
     return $app['twig']->render('index.html.twig', array('articles' => $articles));
 })->bind('home');
+
+
 
 
 // Article details with comments
@@ -28,43 +35,17 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         $comment->setArticle($article);
         $reply = null;
     
-    if(isset($_POST['valider'])){
-        $app->match('/comment/{commentid}', function ($id, Request $request) use ($app) {
-    $comment = $app['dao.comment']->find($id);
-    
-    
-
-        $reply = new Reply();
-        $reply->setComment($comment);
-
-       $commentForm = $app['form.factory']->create(CommentType::class, $reply);
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $app['dao.reply']->save($reply);
-            
-        }
-        $commentFormView = $commentForm->createView();
-  
-    $replies = $app['dao.reply']->findAllByComment($id);
-    
-    
-    
-    
-    return $app['twig']->render('reply.html.twig', array(
-        'comment' => $comment,
-        'replies' => $replies,
-        'commentForm' => $commentFormView));
-    })->bind('reply');
-    
-}
 
         $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
-            $app['session']->getFlashBag()->add('success', 'Your comment was successfully added.');
+            ;
             
         }
+ 
+
+
         $commentFormView = $commentForm->createView();
         $comments = $app['dao.comment']->findAllByArticle($id);
 
@@ -90,13 +71,13 @@ $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
         $reply = new Reply();
         $reply->setComment($comment);
 
-       $commentForm = $app['form.factory']->create(CommentType::class, $reply);
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+       $replyForm = $app['form.factory']->create(ReplyType::class, $reply);
+       $replyForm->handleRequest($request);
+        if ($replyForm->isSubmitted() && $replyForm->isValid()) {
             $app['dao.reply']->save($reply);
             
         }
-        $commentFormView = $commentForm->createView();
+        $replyFormView = $replyForm->createView();
   
     $replies = $app['dao.reply']->findAllByComment($id);
     
@@ -106,8 +87,41 @@ $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
     return $app['twig']->render('reply.html.twig', array(
         'comment' => $comment,
         'replies' => $replies,
-        'commentForm' => $commentFormView));
+        'replyForm' => $replyFormView));
     })->bind('reply');;
+
+
+
+
+
+// comment advert
+
+$app->match('/advert/{id}', function($id, Request $request) use ($app) {
+    $comment = $app['dao.comment']->find($id);
+    $advertForm = $app['form.factory']->create(AdvertType::class, $comment);
+    $advertForm->handleRequest($request);
+    if ($advertForm->isSubmitted() && $advertForm->isValid()) {
+        $app['dao.comment']->save($comment);
+        $app['session']->getFlashBag()->add('success', 'The comment was successfully updated.');
+        
+        // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('home'));  
+    }
+   
+    
+    return $app['twig']->render('advert.html.twig', array(
+        
+        'comment' => $comment,
+        'advertForm' => $advertForm->createView()));
+  
+    
+})->bind('advert');
+    
+    
+    
+    
+    
+
 
 
 
@@ -116,10 +130,34 @@ $app->get('/intro', function () use ($app) {
     return $app['twig']->render('introduce.html.twig');
 })->bind('intro');
 
+
+
+
+
+
 // contact
-$app->get('/contact', function () use ($app) {
-    return $app['twig']->render('contact.html.twig');
+$app->match('/contact', function (Request $request) use ($app) {
+    $contact = new Contact();
+    $contactForm = $app['form.factory']->create(ContactType::class, $contact);
+    $contactForm->handleRequest($request);
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $app['dao.contact']->save($contact);
+          $app['session']->getFlashBag()->add('bravo', 'votre message a été envoyé.');  
+        }
+        
+    
+    return $app['twig']->render('contact.html.twig', array(
+        'contact' => $contact,
+        'contactForm' => $contactForm->createView()));
 })->bind('contact');
+ 
+
+
+
+
+
+
+
 
 
 // Login form

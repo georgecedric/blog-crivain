@@ -52,6 +52,36 @@ return $count;
     }
     
      
+       /**
+     * Saves a comment into the database.
+     *
+     * @param \BlogJF\Domain\Comment $comment The comment to save
+     */
+    public function addAdvert(Comment $comment) {
+  
+$commentData = array(
+            'com_id' => $comment->getArticle()->getId(),
+            'com_advert' => $comment->getAdvert(),
+            
+            );
+
+        if ($comment->getId()) {
+            // The comment has already been saved : update it
+            $this->getDb()->update('comment', $commentData, array('com_id' => $comment->getId()));
+        } else {
+            // The comment has never been saved : insert it
+            $this->getDb()->insert('comment', $commentData);
+            // Get the id of the newly created comment and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $comment->setId($id);
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     /**
      * Saves a comment into the database.
@@ -63,6 +93,7 @@ return $count;
         $commentData = array(
             'art_id' => $comment->getArticle()->getId(),
             'com_content' => $comment->getContent(),
+            'com_advert' => $comment->getAdvert(),
             'com_user' => $comment->getAuthor()
             );
 
@@ -224,7 +255,8 @@ return $count;
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
         $comment->setDate($row['com_date']);
-        $comment->setAuthor($row['com_user']);      
+        $comment->setAuthor($row['com_user']);  
+        $comment->setAdvert($row['com_advert']); 
         $comment->setCompte($count);
         
         $replies= $this->findAllByComment($row['com_id']);

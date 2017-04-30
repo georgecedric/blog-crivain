@@ -8,7 +8,7 @@
     <!--image de presentation--> 
     <div class="row ">
        
-            <img src="../web/image/entete.png"  alt="entete" />
+            <img src="{{ asset('../web/image/image1.png') }}"  alt="entete" />
             
         
     </div>
@@ -41,11 +41,38 @@
             
             {% endfor %}
         </div>
-        <div class=" col-sm-offset-1 col-sm-3 col-md-2 introduce"> 
-            <h1> Qui suis-je?</h1>
-            <img src="../web/image/jf.jpeg"  alt="jf" />
-            <p> hello! moi c'est Jean, écrivain et acteur, je désire partager avec vous l'écriture de mon nouveau roman</p>
-            <p><a class=" btn btn-info btn-sm" href="{{ url('intro') }}" role="button">En savoir plus <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+        
+        
+        <div class=" col-sm-offset-1 col-sm-3 col-md-2 row"> 
+            <div class= "introduce">
+                <h1> Qui suis-je?</h1>
+                <img src="{{ asset('../web/image/jf.jpeg') }}"  alt="jf" />
+                
+                <p> hello! moi c'est Jean, écrivain et acteur, je désire partager avec vous l'écriture de mon nouveau roman</p>
+                <p><a class=" btn btn-info btn-sm" href="{{ url('intro') }}" role="button">En savoir plus <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+            </div>
+            
+                              <div class="introduce">
+                                  
+                   <h1> vous voulez avoir les dernieres actus en live?</h1>               
+                 <img src="{{ asset('../web/image/newsletter-icon.jpeg') }}"  alt="news" />
+                    <p> abonnez vous à ma newsletter</p>
+                                  <p><a class=" btn btn-info btn-sm" href="{{ url('intro') }}" role="button">S'abonner <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+            </div>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        
+
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                                </ul>
+                            </li>
+                        
+                            
+                        {% endif %}
+                    
         </div>
     </div>
         

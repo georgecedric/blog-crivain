@@ -28,6 +28,22 @@ class User implements UserInterface
      * @var string
      */
     private $password;
+    
+    
+    /**
+     * User email.
+     *
+     * @var string
+     */
+    private $email;
+        
+    
+    /**
+     * User newsletter.
+     *
+     * @var string
+     */
+    private $news;
 
     /**
      * Salt that was originally used to encode the password.
@@ -62,6 +78,31 @@ class User implements UserInterface
 
     public function setUsername($username) {
         $this->username = $username;
+        return $this;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+        return $this;
+    }
+    
+        
+    /**
+     * @inheritDoc
+     */
+    public function getNews() {
+        return $this->news;
+    }
+
+    public function setNews($news) {
+        $this->news = $news;
         return $this;
     }
 
