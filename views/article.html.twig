@@ -18,23 +18,18 @@
     {% for comment in comments %}
   
         <div class=" comment row ">
-        
-            <div class=" row ">    
-                
+         <div class=" row ">     
                 {% if comment.advert == NULL %}
-
                   <div class="col-sm-1 text-center initiale "> 
-
                       {{ comment.author|slice(0, 1) | upper }}
-
-                  </div> 
-            
+                  </div>         
                   <div class="col-sm-11  ">
                         <strong>    {{ comment.author}}     </strong> à publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:<br>
+                      {{ comment.content | raw }}<br>
                   </div> 
                 
             </div>
-                {{ comment.content | raw }}<br>
+                
     
                 <p><a class="col-xs-offset-10 col-xs-2 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler le message  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
       
@@ -49,11 +44,11 @@
                         
                             <div class="col-sm-11  ">
                                  <strong>    {{ reply.author}}     </strong> à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
+                                {{ reply.content}}
                             </div>
                             </div>
                         
-                            {{ reply.content}}
-                        
+                            
                         {% else %}
           
                             Pas encore de réponse.
@@ -89,7 +84,8 @@
       
         <div class=" comment">   
 
-            <h3>Ajouter un commentaire</h3><br>
+            <h2>Ajouter un commentaire</h2><br>
+            
 
                         {{ form_start(commentForm) }}
                      
@@ -110,7 +106,7 @@
                                 }}) }}
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+                                <input type="submit" class="btn btn-primary" value="Poster le commentaire" />
                             </div>
                         {{ form_end(commentForm) }}
          </div>          

@@ -60,6 +60,9 @@ $app['dao.contact'] = function ($app) {
     return new BlogJF\DAO\ContactDAO($app['db']);
 };
 
+$app['dao.news'] = function ($app) {
+    return new BlogJF\DAO\NewsletterDAO($app['db']);
+};
 
 
 

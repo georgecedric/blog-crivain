@@ -6,12 +6,14 @@ use BlogJF\Domain\Article;
 use BlogJF\Domain\Reply;
 use BlogJF\Domain\User;
 use BlogJF\Domain\Contact;
+use BlogJF\Domain\Newsletter;
 use BlogJF\Form\Type\CommentType;
 use BlogJF\Form\Type\replyType;
 use BlogJF\Form\Type\AdvertType;
 use BlogJF\Form\Type\ArticleType;
 use BlogJF\Form\Type\UserType;
 use BlogJF\Form\Type\ContactType;
+use BlogJF\Form\Type\NewsletterType;
 
 
 
@@ -102,7 +104,7 @@ $app->match('/advert/{id}', function($id, Request $request) use ($app) {
     $advertForm->handleRequest($request);
     if ($advertForm->isSubmitted() && $advertForm->isValid()) {
         $app['dao.comment']->save($comment);
-        $app['session']->getFlashBag()->add('success', 'The comment was successfully updated.');
+        
         
         // Redirect to admin home page
     return $app->redirect($app['url_generator']->generate('home'));  
@@ -320,3 +322,21 @@ $app->get('/admin/reply/{id}/delete', function($id, Request $request) use ($app)
     // Redirect to admin home page
     return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_reply_delete');
+
+
+
+// newsletter inscription
+$app->match('/news', function (Request $request) use ($app) {
+    $newsletter = new Newsletter();
+    $newsletterForm = $app['form.factory']->create(NewsletterType::class, $newsletter);
+    $newsletterForm->handleRequest($request);
+        if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
+            $app['dao.news']->save($newsletter);
+          $app['session']->getFlashBag()->add('bravo', 'votre message a été envoyé.');  
+        }
+        
+    
+    return $app['twig']->render('news.html.twig', array(
+        'newsletter' => $newsletter,
+        'newsletterForm' => $newsletterForm->createView()));
+})->bind('news');

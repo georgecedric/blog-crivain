@@ -1,51 +1,55 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Qui suis je?{% endblock %}
+{% block title %}Me contacter{% endblock %}
 
 
 
 {% block content %}
 <div class="row commentaire">
-      <div class=" comment">   
-    
-            <h2>Si vous voulez m'écrire un message, c'est ici</h2><br>
-    
-        {{ form_start(contactForm) }}
-            <div class="form-group">
-                <p><h4> Qui etes vous?</h4></p>
-                {{ form_errors(contactForm.author) }}
-                {{ form_widget(contactForm.author, { 'attr':  {
-                    'rows': '1',
-                    'class': 'form-control',
-                    'placeholder': 'Entrez votre nom et prénom'
-                }}) }}<br>
-          <p><h4> Quel est votre email?</h4></p>
-                {{ form_errors(contactForm.email) }}
-                {{ form_widget(contactForm.email, { 'attr':  {
-                    'rows': '1',
-                    'class': 'form-control',
-                    'placeholder': 'Entrez votre email ici'
-                }}) }}<br>
-        <p><h4> Sujet de votre mesage?</h4></p>
-                {{ form_errors(contactForm.title) }}
-                {{ form_widget(contactForm.title, { 'attr':  {
-                    'rows': '1',
-                    'class': 'form-control',
-                    'placeholder': 'Entrez ici le motif de votre message'
-                }}) }}<br>
-                <p><h4>  Entrez votre message ici</h4></p>
-                {{ form_errors(contactForm.content) }}
-                {{ form_widget(contactForm.content, { 'attr':  {
-                    'rows': '4',
-                    'class': 'form-control',
-                    'placeholder': 'Exprimez vous ici'
-                }}) }}
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Envoyer le message" />
-            </div>
-        {{ form_end(contactForm) }}
 
-   </div>
+    <h2>Si vous désirez m'écrire un message, c'est ici</h2><br>
+
+    <div class=" message">
+        <div class=" col-sm-6">
+            <h5> Une question, une remarque, une idée d’article que vous aimeriez voir développer ? N’hésitez pas à prendre contact avec moi au travers de ce petit formulaire. Je m’engage à vous répondre au plus vite.</h5>
+        </div> 
+        <div class=" col-sm-offset-7">  
+            {{ form_start(contactForm) }}
+                <div class="form-group " id= "miseneforme">
+                    <p><h4> Qui etes vous?</h4></p>
+                    {{ form_errors(contactForm.author) }}
+                    {{ form_widget(contactForm.author, { 'attr':  {
+                        'rows': '1',
+                        'class': 'form-control',
+                        'placeholder': 'Entrez votre nom et prénom'
+                    }}) }}<br>
+                    <p><h4> Quel est votre email?</h4></p>
+                    {{ form_errors(contactForm.email) }}
+                    {{ form_widget(contactForm.email, { 'attr':  {
+                        'rows': '1',
+                        'class': 'form-control',
+                        'placeholder': 'Entrez votre email ici'
+                    }}) }}<br>
+                    <p><h4> Sujet de votre mesage?</h4></p>
+                    {{ form_errors(contactForm.title) }}
+                    {{ form_widget(contactForm.title, { 'attr':  {
+                        'rows': '1',
+                        'class': 'form-control',
+                        'placeholder': 'Entrez ici le motif de votre message'
+                    }}) }}<br>
+                    <p><h4>  Entrez votre message ici</h4></p>
+                    {{ form_errors(contactForm.content) }}
+                    {{ form_widget(contactForm.content, { 'attr':  {
+                        'rows': '10',
+                        'class': 'form-control',
+                        'placeholder': 'Exprimez vous ici'
+                    }}) }}
+                </div>
+                <div class="form-group ">
+                    <input type="submit" class="btn btn-primary" value="Envoyer le message" />
+                </div>  
+            {{ form_end(contactForm) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

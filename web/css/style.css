@@ -265,4 +265,29 @@ img{
    background-image: url("../image/banner.jpeg");
  background-size: 100% 110%;
     background-repeat: no-repeat;
+    margin-top: 30px;
+}
+
+.message {
+   background-image: url("../image/message.jpeg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+    padding: 20px;
+    
+
+}
+
+#misenforme{
+    padding-right: 20px;
+}
+
+.message h5{
+    color:white;
+    font-size: 15px;
+    padding-left: 20px;
+    text-align: justify;
+    padding-top: 30px;
+    font-size: 20px;
+    
 }
