@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Newsletter{% endblock %}
+
+
+
+{% block content %}
+<div class="row commentaire">
+    <h2>Message envoyé</h2><br>
+        
+        <div class="col-sm-6 ">
+            <img src="{{ asset('../web/image/email.jpeg') }}"  alt="entete" />
+        </div>
+            
+        <div class="textnews col-sm-5 ">
+            <p>Bonjour,<br>
+            Merci pour votre message<br>
+            Sachez que je lis toujours tout les messages que je reçois. C’est répondre convenablement qui me pose un problème.<br>
+            Aussi, veuillez ne pas vous offusquer si je réponds tardivement, c'est juste que je prend le temps de vous personnaliser ma réponse.</p><br>
+            <h3>Jean Forteroche</h3>
+            <div class="row text-center" id="boutonretour">
+                    <p><a class=" btn btn-info btn-md" href="{{ path('home') }}" role="button">Retour à l'accueil <span class="glyphicon glyphicon-hand-right"></span></a></p>
+                </div> 
+        </div>
+               
+</div>
+
+{% endblock %}

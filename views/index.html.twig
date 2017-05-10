@@ -59,19 +59,7 @@
                     <p> abonnez vous à ma newsletter</p>
                                   <p><a class=" btn btn-info btn-sm" href="{{ url('news') }}" role="button">S'abonner <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
             </div>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         
-
-                            <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ path('logout') }}">Log out</a></li>
-                                </ul>
-                            </li>
-                        
-                            
-                        {% endif %}
                     
         </div>
     </div>

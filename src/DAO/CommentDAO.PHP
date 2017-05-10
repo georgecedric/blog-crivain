@@ -267,12 +267,6 @@ $commentData = array(
              
         }
 
-       
-
-        
-        
-        
-        
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['art_id'];

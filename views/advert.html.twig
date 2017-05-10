@@ -1,0 +1,34 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+
+<div class="row commentaire">
+
+{% block title %}{{ comment.content }} {% endblock %}
+    
+      <div class=" comment">   
+    
+        <h3>Ecrire un signalement</h3><br>
+        {{ form_start(advertForm)  }}
+            <div class="form-group">
+
+                <p><h4>  Décrivez la raison de votre signalement ici</h4></p>
+                {{ form_errors(advertForm.advert) }}
+                {{ form_widget(advertForm.advert, { 'attr':  {
+                    'rows': '4',
+                    'class': 'form-control',
+                    'placeholder': 'Exprimez vous ici'
+                }}) }}
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="envoyer le signalement" onclick="SoumettreFormulaire();"/>
+            </div>
+    
+    
+        {{ form_end(advertForm) }}
+    </div>
+</div>	
+  
+{% endblock %} 
+    

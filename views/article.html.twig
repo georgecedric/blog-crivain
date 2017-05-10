@@ -12,7 +12,7 @@
     <div class="row commentaire">
 
     <h2>{{ article.title }}</h2>
-    <p>{{ article.content}}</p>
+    <p>{{ article.content | raw}}</p>
     <h3>Commentaire</h3>
         
     {% for comment in comments %}
@@ -22,9 +22,14 @@
                 {% if comment.advert == NULL %}
                   <div class="col-sm-1 text-center initiale "> 
                       {{ comment.author|slice(0, 1) | upper }}
+                    <p>{{ comment.author}}</p>  
                   </div>         
-                  <div class="col-sm-11  ">
-                        <strong>    {{ comment.author}}     </strong> à publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:<br>
+                  <div class="col-sm-1   ">
+                        <span id="arrow_border"></span>
+                        
+                      </div> 
+             <div class="col-sm-10 contentcomment  ">
+                         à publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:<br>
                       {{ comment.content | raw }}<br>
                   </div> 
                 
@@ -45,6 +50,7 @@
                             <div class="col-sm-11  ">
                                  <strong>    {{ reply.author}}     </strong> à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
                                 {{ reply.content}}
+   
                             </div>
                             </div>
                         
@@ -87,28 +93,21 @@
             <h2>Ajouter un commentaire</h2><br>
             
 
-                        {{ form_start(commentForm) }}
+                       <form name="comment" method="post"
+                             onsubmit="return validercommentaire()">
                      
                             <div class="form-group">
                                 <p><h4> Entrez votre pseudo</h4></p>
-                                {{ form_errors(commentForm.author) }}
-                                {{ form_widget(commentForm.author, { 'attr':  {
-                                    'rows': '1',
-                                    'class': 'form-control',
-                                    'placeholder': 'Entrez votre nom et prénom'
-                                }}) }}<br>
+                                
+                                <textarea id="comment_author" name="comment[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea><br>
                                 <p><h4>  Entrez votre commentaire ici</h4></p>
-                                {{ form_errors(commentForm.content) }}
-                                {{ form_widget(commentForm.content, { 'attr':  {
-                                    'rows': '4',
-                                    'class': 'form-control',
-                                    'placeholder': 'Exprimez vous ici'
-                                }}) }}
+                                
+                                <textarea id="comment_content" name="comment[content]" required="required" rows="4" class="form-control" placeholder="Exprimez vous ici"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Poster le commentaire" />
                             </div>
-                        {{ form_end(commentForm) }}
+                        </form>
          </div>          
         </div>        
 

@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="row commentaire">
+    
 
     <h2>Si vous désirez m'écrire un message, c'est ici</h2><br>
 
@@ -14,41 +15,26 @@
             <h5> Une question, une remarque, une idée d’article que vous aimeriez voir développer ? N’hésitez pas à prendre contact avec moi au travers de ce petit formulaire. Je m’engage à vous répondre au plus vite.</h5>
         </div> 
         <div class=" col-sm-offset-7">  
-            {{ form_start(contactForm) }}
-                <div class="form-group " id= "miseneforme">
+<form name="contact" method="post" onsubmit="return validermessage()">
+                <div class="form-group " id= "miseneforme" >
                     <p><h4> Qui etes vous?</h4></p>
-                    {{ form_errors(contactForm.author) }}
-                    {{ form_widget(contactForm.author, { 'attr':  {
-                        'rows': '1',
-                        'class': 'form-control',
-                        'placeholder': 'Entrez votre nom et prénom'
-                    }}) }}<br>
+                    
+                    <input type="text" id="contact_author" name="contact[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom" /><br>
                     <p><h4> Quel est votre email?</h4></p>
-                    {{ form_errors(contactForm.email) }}
-                    {{ form_widget(contactForm.email, { 'attr':  {
-                        'rows': '1',
-                        'class': 'form-control',
-                        'placeholder': 'Entrez votre email ici'
-                    }}) }}<br>
+                    
+                    <input type="email" id="contact_email" name="contact[email]" required="required" rows="1" class="form-control" placeholder="Entrez votre email ici" /><br>
                     <p><h4> Sujet de votre mesage?</h4></p>
-                    {{ form_errors(contactForm.title) }}
-                    {{ form_widget(contactForm.title, { 'attr':  {
-                        'rows': '1',
-                        'class': 'form-control',
-                        'placeholder': 'Entrez ici le motif de votre message'
-                    }}) }}<br>
+                    
+                    <input type="text" id="contact_title" name="contact[title]" required="required" rows="1" class="form-control" placeholder="Entrez ici le motif de votre message" /><br>
                     <p><h4>  Entrez votre message ici</h4></p>
-                    {{ form_errors(contactForm.content) }}
-                    {{ form_widget(contactForm.content, { 'attr':  {
-                        'rows': '10',
-                        'class': 'form-control',
-                        'placeholder': 'Exprimez vous ici'
-                    }}) }}
+                    
+                    <textarea id="contact_content" name="contact[content]" required="required" rows="10" class="form-control" placeholder="Exprimez vous ici"></textarea>
+
                 </div>
                 <div class="form-group ">
-                    <input type="submit" class="btn btn-primary" value="Envoyer le message" />
+                    <input type="submit" class="btn btn-primary" value="Envoyer le message" required="required" />
                 </div>  
-            {{ form_end(contactForm) }}
+            </form>
         </div>
     </div>
 </div>

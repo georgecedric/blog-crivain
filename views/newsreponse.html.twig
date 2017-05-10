@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Newsletter{% endblock %}
+
+
+
+{% block content %}
+<div class="row commentaire">
+    <h2>Merci pour votre inscription</h2><br>
+        
+        <div class="col-sm-6 ">
+            <img src="{{ asset('../web/image/NewsIllustration.jpeg') }}"  alt="entete" />
+        </div>
+            
+        <div class="textnews col-sm-5 ">
+            <p>Bonjour,<br>
+            vous venez de vous inscrire sur ma newsletter  et je vous en remercie.<br>
+            Vous serez désormais informés personnellement de la parution de tous mes nouveaux articles.
+            Merci de votre confiance et à bientôt sur mon site</p><br>
+            <h3>Jean Forteroche</h3><br>
+                <div class="row text-center" id="boutonretour">
+                    <p><a class=" btn btn-info btn-md" href="{{ path('home') }}" role="button">Retour à l'accueil <span class="glyphicon glyphicon-hand-right"></span></a></p>
+                </div>  
+            
+            
+            
+            
+            
+        </div>
+               
+</div>
+
+{% endblock %}

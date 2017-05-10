@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% set adminMenu = true %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+
+<div class="commentaire">
+{{ form_start(contactForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="form-group">
+        {{ form_label(contactForm.content, null, { 'label_attr':  {
+            'class': 'col-sm-4 control-label'
+        }}) }}
+        <div class="col-sm-6">
+            {{ form_errors(contactForm.author) }}
+            {{ form_widget(contactForm.author, { 'attr':  {
+                'class': 'form-control',
+                'rows': '1'                
+            }}) }}
+            {{ form_errors(contactForm.content) }}
+            {{ form_widget(contactForm.content, { 'attr':  {
+                'class': 'form-control',
+                'rows': '10'                
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+    </div>
+{{ form_end(contactForm) }}
+</div>
+{% endblock %}

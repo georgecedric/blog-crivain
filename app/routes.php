@@ -15,7 +15,7 @@ use BlogJF\Form\Type\UserType;
 use BlogJF\Form\Type\ContactType;
 use BlogJF\Form\Type\NewsletterType;
 
-
+// FRONT END
 
 // Home page
 $app->get('/', function () use ($app) {
@@ -24,36 +24,23 @@ $app->get('/', function () use ($app) {
 })->bind('home');
 
 
-
-
 // Article details with comments
-
 $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
     
-
-        
         $comment = new Comment();
         $comment->setArticle($article);
         $reply = null;
-    
 
         $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
-            ;
-            
         }
- 
-
 
         $commentFormView = $commentForm->createView();
         $comments = $app['dao.comment']->findAllByArticle($id);
 
-        
-    
-    
     return $app['twig']->render('article.html.twig', array(
         'article' => $article, 
         'comments' => $comments,
@@ -61,15 +48,10 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
 })->bind('article');;
 
 
-
-
-// comment details with replies
-
+// Comment details with replies
 $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
     $comment = $app['dao.comment']->find($id);
     
-    
-
         $reply = new Reply();
         $reply->setComment($comment);
 
@@ -82,10 +64,7 @@ $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
         $replyFormView = $replyForm->createView();
   
     $replies = $app['dao.reply']->findAllByComment($id);
-    
-    
-    
-    
+      
     return $app['twig']->render('reply.html.twig', array(
         'comment' => $comment,
         'replies' => $replies,
@@ -97,7 +76,6 @@ $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
 
 
 // comment advert
-
 $app->match('/advert/{id}', function($id, Request $request) use ($app) {
     $comment = $app['dao.comment']->find($id);
     $advertForm = $app['form.factory']->create(AdvertType::class, $comment);
@@ -132,7 +110,12 @@ $app->get('/intro', function () use ($app) {
     return $app['twig']->render('introduce.html.twig');
 })->bind('intro');
 
-
+// message
+$app->match('/message/{id}', function ($id, Request $request) use ($app) {
+    $contact = $app['dao.contact']->find($id);
+    return $app['twig']->render('message.html.twig', array(
+        'contact' => $contact));
+})->bind('message');;
 
 
 
@@ -144,7 +127,8 @@ $app->match('/contact', function (Request $request) use ($app) {
     $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $app['dao.contact']->save($contact);
-          $app['session']->getFlashBag()->add('bravo', 'votre message a été envoyé.');  
+           
+            return $app->redirect($app['url_generator']->generate('contactreponse'));
         }
         
     
@@ -177,10 +161,14 @@ $app->get('/admin', function() use ($app) {
     $comments = $app['dao.comment']->findAll();
     $users = $app['dao.user']->findAll();
     $replies =$app['dao.reply']->findAll();
+    $contacts =$app['dao.contact']->findAll();
+    $newsletters =$app['dao.news']->findAll();
     return $app['twig']->render('admin.html.twig', array(
         'articles' => $articles,
         'comments' => $comments,
         'users' => $users,
+        'contacts'=>$contacts,
+        'newsletters'=>$newsletters,
         'replies' => $replies));
 })->bind('admin');
 
@@ -244,6 +232,46 @@ $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($ap
     // Redirect to admin home page
     return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_comment_delete');
+
+
+
+// Edit an existing comment
+$app->match('/admin/contact/{id}/edit', function($id, Request $request) use ($app) {
+    $contact = $app['dao.comment']->find($id);
+    $contactForm = $app['form.factory']->create(ContactType::class, $contact);
+    $contactForm->handleRequest($request);
+    if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+        $app['dao.contact']->save($contact);
+        $app['session']->getFlashBag()->add('success', 'The comment was successfully updated.');
+    }
+    return $app['twig']->render('contact_form.html.twig', array(
+        'title' => 'Edit contact',
+        'contactForm' => $contactForm->createView()));
+})->bind('admin_contact_edit');
+
+// Remove a contact
+$app->get('/admin/contact/{id}/delete', function($id, Request $request) use ($app) {
+    $app['dao.contact']->delete($id);
+    $app['session']->getFlashBag()->add('success', 'The comment was successfully removed.');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
+})->bind('admin_contact_delete');
+
+// Remove a newsletter contact
+$app->get('/admin/newsletter/{id}/delete', function($id, Request $request) use ($app) {
+    $app['dao.news']->delete($id);
+    $app['session']->getFlashBag()->add('success', 'The comment was successfully removed.');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
+})->bind('admin_newsletter_delete');
+
+
+
+
+
+
+
+
 
 
 // Add a user
@@ -332,7 +360,8 @@ $app->match('/news', function (Request $request) use ($app) {
     $newsletterForm->handleRequest($request);
         if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
             $app['dao.news']->save($newsletter);
-          $app['session']->getFlashBag()->add('bravo', 'votre message a été envoyé.');  
+          // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('newsletter'));  
         }
         
     
@@ -340,3 +369,16 @@ $app->match('/news', function (Request $request) use ($app) {
         'newsletter' => $newsletter,
         'newsletterForm' => $newsletterForm->createView()));
 })->bind('news');
+
+
+// newsletter reponse
+$app->get('/newsletter', function () use ($app) {
+    
+    return $app['twig']->render('newsreponse.html.twig');
+})->bind('newsletter');
+
+// contact reponse
+$app->get('/contactreponse', function () use ($app) {
+    
+    return $app['twig']->render('contactreponse.html.twig');
+})->bind('contactreponse');

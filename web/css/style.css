@@ -222,6 +222,12 @@ img{
     
 }
 
+ .initiale p{
+    color:black;
+     font-size: 12px;
+     font-style: italic;
+}
+
 .reponseinitiale {
     background-color: skyblue;  
     border: 2px, solid, black;
@@ -290,4 +296,67 @@ img{
     padding-top: 30px;
     font-size: 20px;
     
+}
+
+.textnews{
+    color:#5bc0de;
+    font-size: 20px;
+    padding-left: 20px;
+    text-align: justify;
+    padding-top: 30px;
+    font-size: 20px;
+    font-style: italic;
+    
+}
+
+
+#bubble{
+  position: relative;
+  right:50px;
+  background-color:white;
+  text-align:center;
+  width:200px;
+  height:100px;
+  border:2px solid #555555;
+  border-radius:60px 40px;
+  border-top-left-radius:60px 40px;
+  border-bottom-right-radius:80px 40px;
+  border-bottom-left-radius:80px 40px; 
+}
+
+#arrow_border{
+  width:0;
+  height:0;
+  line-height:0;
+  border-bottom:20px solid #ececec;
+    border-top:20px solid transparent;
+  border-left:20px solid transparent;
+  border-right:20px solid #ececec; /* couleur de la bordure de la bulle */
+  position:absolute;
+    top:15px;
+  
+  
+}
+
+.contentcomment{
+    background-color:#ececec;
+    margin-left:-30px;
+    padding: 15px;
+    text-align: justify;
+    
+}
+.lecture{
+    background-color:#ececec;
+    margin-left:30px;
+    padding: 10px;
+    text-align: justify;
+    border: 2px solid grey;
+    
+}
+#titlemessage{
+    color:#5bc0de;
+    text-decoration:underline;
+}
+#boutonretour{
+    padding-top: 40px;
 }
