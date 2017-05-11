@@ -31,26 +31,70 @@
              <div class="col-sm-10 contentcomment  ">
                          à publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:<br>
                       {{ comment.content | raw }}<br>
+                <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
+                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler le message  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
+                  <form name="reply" method="post">
+          
+            <div class="form-group">
+                <p><h6> Entrez votre pseudo</h6></p>
+                
+                <textarea id="reply_author" name="reply[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea>
+                <p><h6>  Entrez votre réponse ici</h6></p>
+                
+                <textarea id="reply_content" name="reply[content]" required="required" rows="1" class="form-control" placeholder="Exprimez vous ici"></textarea><br>
+                         <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Répondre" />
+            </div><br>
+             
                   </div> 
+            
+            </div>
+
+            
+        </form>
                 
             </div>
                 
     
-                <p><a class="col-xs-offset-10 col-xs-2 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler le message  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
       
       
             <div class=" reponse row "> 
+                <h4>réponses au commentaire</h4>
                 {% for reply in comment.reponse %}
                     <div class=" row ">
-                            <div class="col-sm-1 text-center reponseinitiale "> 
+                            <div class=" col-sm-2 col text-center initiale "> 
                                 {{ reply.author|slice(0, 1) | upper }}<br>
+                                <p>{{ reply.author}}</p>
                             </div> 
                               
                         
-                            <div class="col-sm-11  ">
-                                 <strong>    {{ reply.author}}     </strong> à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
-                                {{ reply.content}}
-   
+                            <div class="col-sm-10  ">
+                                  à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
+                                {{ reply.content}}<br>
+                                <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
+                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
+               {{ form_start(replyForm) }}
+          
+            <div class="form-group">
+                <form name="reply" method="post">
+          
+            <div class="form-group">
+                <p><h6> Entrez votre pseudo</h6></p>
+                
+                <textarea id="reply_author" name="reply[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea>
+                <p><h6>  Entrez votre réponse ici</h6></p>
+                
+                <textarea id="reply_content" name="reply[content]" required="required" rows="1" class="form-control" placeholder="Exprimez vous ici"></textarea><br>
+                         <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Répondre" />
+            </div><br>
+             
+                  </div> 
+            
+            </div>
+
+            
+        </form>
                             </div>
                             </div>
                         
@@ -61,7 +105,7 @@
     
     
                         {% endfor %}
-                          <p><a class="col-xs-offset-10 col-xs-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>   
+                             
     
 
             

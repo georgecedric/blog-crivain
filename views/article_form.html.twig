@@ -1,9 +1,7 @@
 {% extends 'layout.html.twig' %}
+
 {% set adminMenu = true %}
 
-{% block javascripts %}
-    <script type="text/javascript" src="{{asset('/lib/tiny_mce/tiny_mce.js')}}"></script>
-{% endblock %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -17,38 +15,29 @@
     {% endfor %}
 
     <div class="comment">
-    {{ form_start(articleForm, { 'attr': {'class': 'form-horizontal'} }) }}
-        <div class="form-group">
-            {{ form_label(articleForm.title, null, { 'label_attr':  {
-                'class': 'col-sm-4 control-label'
-            }}) }}
-            <div class="col-sm-6">
-                {{ form_errors(articleForm.title) }}
-                {{ form_widget(articleForm.title, { 'attr':  {
-                    'class': 'form-control'
-                }}) }}
-            </div>
-        </div>
+        <form name="article" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-4 control-label required" for="article_title">Title</label>
+                <div class="col-sm-6">
 
-        <div class="form-group">
-            {{ form_label(articleForm.content, null, { 'label_attr':  {
-                'class': 'col-sm-4 control-label'
-            }}) }}
-            <div class="col-sm-6">
-                {{ form_errors(articleForm.content) }}
-                {{ form_widget(articleForm.content, { 'attr':  {
-                    'class': 'tiny_mce',
-                    'rows': '8'
-                }}) }}
+                    <input type="text" id="article_title" name="article[title]" required="required" class="form-control" />
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-3">
-                <input type="submit" class="btn btn-primary" value="Save" />
+            <div class="form-group">
+                <label class="col-sm-4 control-label required" for="article_content">Content</label>
+                <div class="col-sm-6">
+
+                    <textarea id="article_content" name="article[content]" required="required" class="form-control" rows="8"></textarea>
+                </div>
             </div>
-        </div>
-    {{ form_end(articleForm) }}
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-3">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </div>
+        </form>
     </div>
 </div>    
 {% endblock %}

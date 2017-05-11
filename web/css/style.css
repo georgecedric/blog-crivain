@@ -146,40 +146,7 @@ img{
     margin-top: 20px;
 }
 
-/* Styles pour les smartphones */
-
-         @media (max-width: 768px) {
-        .date{
-         
-            color: white;
-            margin-top: 30px;
-        } 
-          .home{
-    
-    margin-left: 40px;
-    margin-right:40px;
-    margin-bottom:40px;
-}        
-  header img
-{
-
- width: 40%;   
-}      
-    
-      }
-        
-
-      /* Styles pour les tablettes */
-      @media (min-width: 768px) {
-                   .home{
-    
-    margin-left: 40px;
-    margin-right:40px;
-    margin-bottom:40px;
-          
-        
-      }
-     }   
+ 
 
           .introduce h1{
     color: #5bc0de;
@@ -217,7 +184,7 @@ img{
     font-size: 30px;
     color:white;
     box-shadow: 6px 6px 10px darkgrey;
-  
+  margin-bottom: 40px;
     border-radius: 30px;
     
 }
@@ -249,6 +216,26 @@ img{
     margin-right: -25px;
     
 }
+.presentation h2{
+    background-color: #5bc0de; 
+    padding:10px;
+    color: white;
+    margin-left: -40px;
+    box-shadow: 6px 6px 10px black;
+    margin-right: -25px;
+    
+}
+.presentation img{
+    background-color: #5bc0de; 
+    padding:10px;
+    color: white;
+    margin: 10px;
+    box-shadow: 6px 6px 10px black;
+    margin-top:20px;
+   margin-right:20px;
+    
+    
+}
 
 
 
@@ -256,7 +243,8 @@ img{
     background-color: #ececec;
     border: 2px, solid, black;
     margin: 20px;
-    Margin-left:100px;
+    Margin-left:200px;
+    
     padding: 20px;
     box-shadow: 6px 6px 10px darkgrey;
 }
@@ -334,6 +322,7 @@ img{
   border-right:20px solid #ececec; /* couleur de la bordure de la bulle */
   position:absolute;
     top:15px;
+    right: 30px;
   
   
 }
@@ -360,3 +349,78 @@ img{
 #boutonretour{
     padding-top: 40px;
 }
+
+
+
+
+/* Styles pour les smartphones */
+
+         @media (max-width: 768px) {
+            .date{
+         
+            color: white;
+            margin-top: 30px;
+            } 
+          .home{
+    
+            margin-left: 40px;
+            margin-right:40px;
+            margin-bottom:40px;
+            }        
+          header img
+            {
+
+         width: 40%; 
+                
+                
+            } 
+                   .commentaire .comment{
+    background-color: white;  
+    border: 2px, solid, black;
+    margin: 0px;
+    margin-left: 40px;
+    margin-right: 0px;
+    padding: 10px;
+    box-shadow: 6px 6px 10px darkgrey;
+    
+    
+}
+             .commentaire{
+    background-color: white;  
+    margin: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    box-shadow: 6px 6px 10px black;
+    
+    
+}
+    .reponse{
+    background-color: #ececec;
+    border: 2px, solid, black;
+    margin: 20px;
+    Margin-left:50px;
+    
+    padding: 20px;
+    box-shadow: 6px 6px 10px darkgrey;
+}      
+      }
+        
+
+      /* Styles pour les tablettes */
+      @media (min-width: 768px) {
+                   .home{
+    
+    margin-left: 40px;
+    margin-right:40px;
+    margin-bottom:40px;
+          
+        
+      }
+    
+    
+          
+     }  
+
+
+

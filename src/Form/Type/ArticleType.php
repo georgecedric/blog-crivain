@@ -13,10 +13,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class, array(
-        'attr' => array(
-            'class' => 'tinymce'
-        ));
+            ->add('content', TextareaType::class);
     }
 
     public function getName()

@@ -30,13 +30,26 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     
         $comment = new Comment();
         $comment->setArticle($article);
-        $reply = null;
+        $reply = new Reply();
+    $reply->setComment($comment);
 
         $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
         }
+    
+       $replyForm = $app['form.factory']->create(ReplyType::class, $reply);
+       $replyForm->handleRequest($request);
+        if ($replyForm->isSubmitted() && $replyForm->isValid()) {
+            $app['dao.reply']->save($reply);
+            
+        }
+        $replyFormView = $replyForm->createView();
+        $replies = $app['dao.reply']->findAllByComment($id);
+    
+    
+    
 
         $commentFormView = $commentForm->createView();
         $comments = $app['dao.comment']->findAllByArticle($id);
@@ -44,6 +57,8 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     return $app['twig']->render('article.html.twig', array(
         'article' => $article, 
         'comments' => $comments,
+        'replies' => $replies,
+        'replyForm' => $replyFormView,
         'commentForm' => $commentFormView));
 })->bind('article');;
 
@@ -58,7 +73,7 @@ $app->match('/comment/{id}', function ($id, Request $request) use ($app) {
        $replyForm = $app['form.factory']->create(ReplyType::class, $reply);
        $replyForm->handleRequest($request);
         if ($replyForm->isSubmitted() && $replyForm->isValid()) {
-            $app['dao.reply']->save($reply);
+            $app['dao.reply']->save($reply );
             
         }
         $replyFormView = $replyForm->createView();

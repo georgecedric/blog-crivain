@@ -45,7 +45,7 @@ class ReplyDAO extends DAO
     public function save(Reply $reply) {
         
         $replyData = array(
-            'com_id' => $reply->getComment()->getId(),
+            
             'rep_content' => $reply->getContent(),
             'rep_user' => $reply->getAuthor()
             );

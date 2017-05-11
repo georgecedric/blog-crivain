@@ -4,10 +4,91 @@
 
 {% block content %}
 
+    
+    
+    <!--block article-->  
+    <div class="row container-fluid ">
+        <div class="col-sm-offset-1 col-sm-6 col-md-8 article">
+            
+            <article class=" presentation" >
+              <div class="  row ">  
+            <div class="  col-md-5 ">
+                
+               <img src="{{ asset('../web/image/ecrivain.jpeg') }}"  alt="jf" /> 
 
+              </div> 
+              <div class="   col-md-offset-1 col-md-6 ">
+                
+               <h2> Qui Suis Je?</h2> <br>
+                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ip.....</p><br>
 
-<div class="row commentaire">
+              </div>  
+             </div>   
+                
+         <div class="  row ">
+            <div class="    col-md-6 ">
+               <h2> Ma bibliographie</h2> <br>
+                  <ul>
+                      <li> Livre 1</li>
+                      <li> Livre 2</li>
+                      <li> Livre 3</li>
+                      <li> Livre 4</li>
+                      <li> Livre 5</li>
+
+                  </ul>
+              </div> 
+            <div class=" col-md-offset-1 col-md-5 ">
+                
+               <img src="{{ asset('../web/image/bibliographie.jpeg') }}"  alt="jf" /> 
+
+              </div> 
+               
+             </div>
+                
+                <div class="  row ">
+ 
+            <div class="  col-md-5 ">
+                
+               <img src="{{ asset('../web/image/film.jpeg') }}"  alt="jf" /> 
+
+              </div>
+            <div class=" col-md-offset-1   col-md-6 ">
+               <h2> Ma Filmographie</h2> <br>
+                  <ul>
+                      <li> Film 1</li>
+                      <li> Film 2</li>
+                      <li> Film 3</li>
+                      <li> Film 4</li>
+                      <li> Film 5</li>
+
+                  </ul>
+              </div>
+               
+             </div>
+            </article>
+            
+          
+        </div>
         
         
-      </div>
+        <div class=" col-sm-offset-1 col-sm-3 col-md-2 row"> 
+            <div class= "introduce">
+                <h1> Me contacter?</h1>
+                <img src="{{ asset('../web/image/La plume.jpeg') }}"  alt="jf" />
+                
+                <p> Si vous désirez m'écrire rien de plus simple, cliquez sous le bouton ci dessous</p>
+                <p><a class=" btn btn-info btn-sm" href="{{ url('contact') }}" role="button">m'écrire <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+            </div>
+            
+                              <div class="introduce">
+                                  
+                   <h1> vous voulez avoir les dernieres actus en live?</h1>               
+                 <img src="{{ asset('../web/image/newsletter-icon.jpeg') }}"  alt="news" />
+                    <p> abonnez vous à ma newsletter</p>
+                                  <p><a class=" btn btn-info btn-sm" href="{{ url('news') }}" role="button">S'abonner <span class="glyphicon glyphicon glyphicon-hand-right"></span></a></p>
+            </div>
+                        
+                    
+        </div>
+    </div>
 {% endblock %}
