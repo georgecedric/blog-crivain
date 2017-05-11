@@ -45,8 +45,9 @@ class ReplyDAO extends DAO
     public function save(Reply $reply) {
         
         $replyData = array(
-            
+            'com_id' => $reply->getComment()->getId(),
             'rep_content' => $reply->getContent(),
+            'rep_advert' => $reply->getAdvert(),
             'rep_user' => $reply->getAuthor()
             );
 
@@ -62,7 +63,31 @@ class ReplyDAO extends DAO
         }
     }
     
-         
+    
+   public function addAdvert(Reply $reply) {
+  
+$commentData = array(
+            'rep_id' => $reply->getArticle()->getId(),
+            'rep_advert' => $reply->getAdvert(),
+            
+            );
+
+        if ($reply->getId()) {
+            // The comment has already been saved : update it
+            $this->getDb()->update('reponse', $replyData, array('rep_id' => $reply->getId()));
+        } else {
+            // The comment has never been saved : insert it
+            $this->getDb()->insert('reponse', $replyData);
+            // Get the id of the newly created comment and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $reply->setId($id);
+        }
+    } 
+    
+    
+    
+    
+    
    /**
      * Returns a list of all comments, sorted by date (most recent first).
      *
@@ -203,6 +228,7 @@ class ReplyDAO extends DAO
         $reply->setId($row['rep_id']);
         $reply->setContent($row['rep_content']);
         $reply->setDate($row['rep_date']);
+        $reply->setAdvert($row['rep_advert']);
         $reply->setAuthor($row['rep_user']);
 
         if (array_key_exists('com_id', $row)) {

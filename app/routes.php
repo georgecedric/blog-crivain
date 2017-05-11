@@ -111,6 +111,28 @@ $app->match('/advert/{id}', function($id, Request $request) use ($app) {
   
     
 })->bind('advert');
+
+// reply advert
+$app->match('/replyadvert/{id}', function($id, Request $request) use ($app) {
+    $reply = $app['dao.reply']->find($id);
+    $advertForm = $app['form.factory']->create(AdvertType::class, $reply);
+    $advertForm->handleRequest($request);
+    if ($advertForm->isSubmitted() && $advertForm->isValid()) {
+        $app['dao.reply']->save($comment);
+        
+        
+        // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('home'));  
+    }
+   
+    
+    return $app['twig']->render('replyadvert.html.twig', array(
+        
+        'reply' => $reply,
+        'advertForm' => $advertForm->createView()));
+  
+    
+})->bind('replyadvert');
     
     
     

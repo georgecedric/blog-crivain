@@ -36,6 +36,13 @@ class Reply {
      * @var \Blogjf\Domain\Comment
      */
     private $comment;
+    
+    /**
+     * Comment advert.
+     *
+     * @var integer
+     */
+    private $advert;
 
 
     public function getId() {
@@ -78,6 +85,14 @@ class Reply {
 }
     public function setComment(Comment $comment) {
         $this->comment = $comment;
+        return $this;
+    }
+    public function getAdvert() {
+        return $this->advert;
+    }
+
+    public function setAdvert($advert) {
+        $this->advert = $advert;
         return $this;
     }
 

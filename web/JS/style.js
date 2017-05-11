@@ -79,4 +79,26 @@ function validercommentaire(){
     else {
     return true;
     }
+    
+}
+    function validerreponse(){
+ 
+
+    if(document.forms['reply'].reply_author.value == "")
+        {
+        alert ('Veuillez entrer votre Nom ou Pseudo');
+        document.forms['reply'].reply_author.focus();
+        return false;
+
+        }
+    if(document.forms['reply'].reply_content.value == "")
+        {
+        alert ('Veuillez entrer un message');
+        document.forms['reply'].reply_content.focus();
+        return false;
+
+        }
+    else {
+    return true;
+    }
 }

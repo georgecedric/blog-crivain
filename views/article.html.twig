@@ -33,7 +33,7 @@
                       {{ comment.content | raw }}<br>
                 <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
                 <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler le message  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
-                  <form name="reply" method="post">
+                  <form name="reply" method="post" onsubmit="return validerreponse()">
           
             <div class="form-group">
                 <p><h6> Entrez votre pseudo</h6></p>
@@ -72,7 +72,7 @@
                                   à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
                                 {{ reply.content}}<br>
                                 <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
-                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
+                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('replyadvert', { 'id': reply.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
                {{ form_start(replyForm) }}
           
             <div class="form-group">
