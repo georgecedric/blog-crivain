@@ -8,18 +8,16 @@ use BlogJF\Domain\Newsletter;
 class NewsletterDAO extends DAO
 {
     
-        /**
-     * Saves an article into the database.
+    /**
+     * Saves an newsletter into the database.
      *
-     * @param \BlogJF\Domain\Contact $contact The contact to save
+     * @param \BlogJF\Domain\Newsletter $newsletter The contact to save
      */
     public function save(Newsletter $newsletter) {
         $newsletterData = array(
-            
             'newsletter_name' => $newsletter->getName(),
             'newsletter_email' => $newsletter->getEmail(),
             );
-
         if ($newsletter->getId()) {
             // The article has already been saved : update it
             $this->getDb()->update('newsletter', $newsletterData, array('newsletter_id' => $newsletter->getId()));
@@ -33,24 +31,20 @@ class NewsletterDAO extends DAO
     }
 
     /**
-     * Removes an contact message from the database.
+     * Removes an contact newsletter  from the database.
      *
-     * @param integer $id The contact id.
+     * @param integer $id The newsletter id.
      */
     public function delete($id) {
-        // Delete the article
+        // Delete the newsletter
         $this->getDb()->delete('newsletter', array('newsletter_id' => $id));
     } 
     
-    
-    
-    
-    
-    
+
     /**
-     * Return a list of all articles, sorted by date (most recent first).
+     * Return a list of all contact newsletter, sorted by date (most recent first).
      *
-     * @return array A list of all articles.
+     * @return array A list of all contact newsletter.
      */
     public function findAll() {
         $sql = "select * from newsletter ";
@@ -66,11 +60,11 @@ class NewsletterDAO extends DAO
     }
  
        /**
-     * Returns an article matching the supplied id.
+     * Returns an contact newsletter matching the supplied id.
      *
      * @param integer $id
      *
-     * @return \BlogJF\Domain\Contact|throws an exception if no matching article is found
+     * @return \BlogJF\Domain\Newsletter|throws an exception if no matching contact newsletter is found
      */
     public function find($id) {
         $sql = "select * from newsletter where newsletter_id=?";
@@ -85,17 +79,15 @@ class NewsletterDAO extends DAO
     /**
      * Creates an Message object based on a DB row.
      *
-     * @param array $row The DB row containing Contact data.
-     * @return \BlogJF\Domain\Contact
+     * @param array $row The DB row containing newsletter data.
+     * @return \BlogJF\Domain\Newsletter
      */
     protected function buildDomainObject(array $row) {
-       
         $newsletter = new Newsletter();
         $newsletter->setId($row['newsletter_id']);
         $newsletter->setName($row['newsletter_name']);
         $newsletter->setLastname($row['newsletter_lastname']);
         $newsletter->setEmail($row['newsletter_email']);
-        
         return $newsletter;
     }
 }

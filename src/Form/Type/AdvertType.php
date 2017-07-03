@@ -5,7 +5,7 @@ namespace BlogJF\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 
@@ -13,12 +13,7 @@ class AdvertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options){
     
-        $builder->add('advert', TextareaType::class,array(
-			        'attr' => array(
-			            'class' => 'tinymce',
-			            'data-theme' => 'medium' // simple, advanced, bbcode
-			        )
-    		));
+        $builder->add('advert', TextareaType::class);
     }
 
     public function getName()

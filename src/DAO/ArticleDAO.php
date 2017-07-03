@@ -8,7 +8,7 @@ use BlogJF\Domain\Article;
 class ArticleDAO extends DAO
 {
     
-       /**
+    /**
      * Saves an article into the database.
      *
      * @param \BlogJF\Domain\Article $article The article to save
@@ -30,7 +30,7 @@ class ArticleDAO extends DAO
             $article->setId($id);
         }
     }
-
+   
     /**
      * Removes an article from the database.
      *
@@ -40,11 +40,6 @@ class ArticleDAO extends DAO
         // Delete the article
         $this->getDb()->delete('articles', array('art_id' => $id));
     } 
-    
-    
-    
-    
-    
     
     /**
      * Return a list of all articles, sorted by date (most recent first).
@@ -63,7 +58,8 @@ class ArticleDAO extends DAO
         }
         return $articles;
     }
-    
+ 
+   
     /**
      *
      * @return le nombre de commentaire pour un article.
@@ -78,9 +74,8 @@ return $count;
     
   }  
     
-    
-    
-       /**
+ 
+    /**
      * Returns an article matching the supplied id.
      *
      * @param integer $id
@@ -97,6 +92,7 @@ return $count;
             throw new \Exception("No article matching id " . $id);
     }
 
+    
     /**
      * Creates an Article object based on a DB row.
      *

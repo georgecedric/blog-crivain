@@ -16,7 +16,7 @@ class UserDAO extends DAO implements UserProviderInterface
      *
      * @param integer $id The user id.
      *
-     * @return \MicroCMS\Domain\User|throws an exception if no matching user is found
+     * @return \BlogJF\Domain\User|throws an exception if no matching user is found
      */
     public function find($id) {
         $sql = "select * from user where usr_id=?";
@@ -45,14 +45,7 @@ class UserDAO extends DAO implements UserProviderInterface
         }
         return $entities;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     /**
      * {@inheritDoc}
@@ -92,7 +85,7 @@ class UserDAO extends DAO implements UserProviderInterface
      * Creates a User object based on a DB row.
      *
      * @param array $row The DB row containing User data.
-     * @return \MicroCMS\Domain\User
+     * @return \BlogJF\Domain\User
      */
     protected function buildDomainObject(array $row) {
         $user = new User();
@@ -107,7 +100,7 @@ class UserDAO extends DAO implements UserProviderInterface
     /**
      * Saves a user into the database.
      *
-     * @param \MicroCMS\Domain\User $user The user to save
+     * @param \BlogJF\Domain\User $user The user to save
      */
     public function save(User $user) {
         $userData = array(

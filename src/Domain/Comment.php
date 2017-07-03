@@ -39,11 +39,6 @@ class Comment
      */
     private $advert;
     
-   
-    
-
-
- 
 
     /**
      * Associated article.

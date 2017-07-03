@@ -42,6 +42,12 @@ $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\LocaleServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
+
+
+
+
+
+
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../var/logs/blogJF.log',
     'monolog.name' => 'BlogJF',
@@ -74,12 +80,24 @@ $app['dao.comment'] = function ($app) {
     return $commentDAO;
 };
 
+
+
 $app['dao.reply'] = function ($app) {
     $replyDAO = new BlogJF\DAO\ReplyDAO($app['db']);
     $replyDAO->setArticleDAO($app['dao.article']);
     $replyDAO->setUserDAO($app['dao.user']);
     $replyDAO->setCommentDAO($app['dao.comment']);
     return $replyDAO;
+};
+
+
+$app['dao.reponsereply'] = function ($app) {
+    $reponsereplyDAO = new BlogJF\DAO\ReponsereplyDAO($app['db']);
+    $reponsereplyDAO->setArticleDAO($app['dao.article']);
+    $reponsereplyDAO->setUserDAO($app['dao.user']);
+    $reponsereplyDAO->setCommentDAO($app['dao.comment']);
+    $reponsereplyDAO->setReplyDAO($app['dao.reply']);
+    return $reponsereplyDAO;
 };
 
 

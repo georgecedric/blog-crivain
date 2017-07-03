@@ -3,8 +3,6 @@
 {% block title %}message {% endblock %}
 
 
-
-
 {% block content %}
 <div class="row commentaire">
     <h2>Message de :{{ contact.author }}</h2><br>
@@ -13,13 +11,18 @@
         <div class="lecture">   
             {{ contact.title }}<br>
         </div>
-        <h3 id="titlemessage">Message</h3><br>
+    <h3 id="titlemessage">Message</h3><br>
         <div class="lecture">
             {{ contact.content }}<br>   
         </div> 
-        <h3  id="titlemessage">Email de l'expéditeur</h3><br>
+    <h3  id="titlemessage">Email de l'expéditeur</h3><br>
         <div class="lecture">  
             {{ contact.email }}<br>   
         </div> 
 </div>
+
+
 {% endblock %} 
+
+
+

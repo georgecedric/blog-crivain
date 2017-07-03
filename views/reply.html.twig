@@ -1,22 +1,22 @@
 {% extends "layout.html.twig" %}
 
 
-
+{% block title %}repondre à un commentaire {% endblock %}
 
 
 
 {% block content %}
 <div class="row commentaire">
-
-{% block title %}{{ comment.content }} {% endblock %}
-    
-  
     <div class=" comment">
-            <h3>Réponse</h3>
+        <h2>Commentaire écrit part {{ comment.author }}</h2> <br>
+        {{ comment.content }}
+  
+    
+            <h2>Réponses</h2>
 
             {% for reply in replies %}
         
-                <strong> {{ reply.id}}</strong> à publié  le {{ reply.date }}:<br>
+                <strong> {{ reply.author | upper}}</strong> à publié  le {{ reply.date }}:<br>
                 {{ reply.content }}<br>
         
             {% else %}
@@ -25,36 +25,45 @@
        
             {% endfor %}
     </div> 
-    
-    
       <div class=" comment">   
+
+            <h2>répondre au commentaire de {{ comment.author | upper}}</h2><br>
+            
+
+            {{ form_start(replyForm, { 'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group">
+                        {{ form_label(replyForm.author, null, { 'label_attr':  {
+                            'class': 'col-sm-4 control-label'
+                        }}) }}
+                        <div class="col-sm-6">
+                            {{ form_errors(replyForm.author) }}
+                            {{ form_widget(replyForm.author, { 'attr':  {
+                                'class': 'form-control',
+                                'rows': '1'                
+                            }}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(replyForm.content, null, { 'label_attr':  {
+                            'class': 'col-sm-4 control-label'
+                        }}) }}
+                        <div class="col-sm-6">
+
+                            {{ form_errors(replyForm.content) }}
+                            {{ form_widget(replyForm.content, { 'attr':  {
+                                'class': 'form-control',
+                                'rows': '10'                
+                            }}) }} <br>
+                            <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="envoyer la réponse" />
+                        </div>
+                     </div>          
+                    </div>        
+            {{ form_end(replyForm) }}
+
+</div>
     
-            <h3>Ecrire une réponse</h3><br>
-            {{ form_start(replyForm) }}
-          
-            <div class="form-group">
-                <p><h4> Entrez votre pseudo</h4></p>
-                {{ form_errors(replyForm.author) }}
-                {{ form_widget(replyForm.author, { 'attr':  {
-                    'rows': '1',
-                    'class': 'form-control',
-                    'placeholder': 'Entrez votre nom et prénom'
-                }}) }}<br>
-                <p><h4>  Entrez votre commentaire ici</h4></p>
-                {{ form_errors(replyForm.content) }}
-                {{ form_widget(replyForm.content, { 'attr':  {
-                    'rows': '4',
-                    'class': 'form-control',
-                    'placeholder': 'Exprimez vous ici'
-                }}) }}
-            </div>
-
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
-            </div>
-        {{ form_end(replyForm) }}
-
-   </div>         
+      
 	
   </div>
 {% endblock %} 

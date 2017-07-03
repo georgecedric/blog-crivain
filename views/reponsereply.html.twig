@@ -1,0 +1,71 @@
+{% extends "layout.html.twig" %}
+
+
+{% block title %}réponse à une réponse {% endblock %}
+
+
+
+{% block content %}
+<div class="row commentaire">
+    <div class=" comment">
+    <h2>Réponse de {{ reply.author |upper}} </h2>
+    {{ reply.content }}
+    
+  
+    
+            <h3>Réponse</h3>
+
+            {% for reponsereply in reponsereplies %}
+        
+                <strong> {{ reponsereply.author}}</strong> à publié  le {{ reponsereply.date }}:<br>
+                {{ reponsereply.content }}<br>
+        
+            {% else %}
+          
+                Pas encore de réponse.
+       
+            {% endfor %}
+    </div> 
+      <div class=" comment">   
+
+            <h2>Répondre à {{ reply.author |upper}}</h2><br>
+            
+
+            {{ form_start(reponsereplyForm, { 'attr': {'class': 'form-horizontal'} }) }}
+                    <div class="form-group">
+                        {{ form_label(reponsereplyForm.author, null, { 'label_attr':  {
+                            'class': 'col-sm-4 control-label'
+                        }}) }}
+                        <div class="col-sm-6">
+                            {{ form_errors(reponsereplyForm.author) }}
+                            {{ form_widget(reponsereplyForm.author, { 'attr':  {
+                                'class': 'form-control',
+                                'rows': '1'                
+                            }}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(reponsereplyForm.content, null, { 'label_attr':  {
+                            'class': 'col-sm-4 control-label'
+                        }}) }}
+                        <div class="col-sm-6">
+
+                            {{ form_errors(reponsereplyForm.content) }}
+                            {{ form_widget(reponsereplyForm.content, { 'attr':  {
+                                'class': 'form-control',
+                                'rows': '10'                
+                            }}) }} <br>
+                            <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="envoyer le commentaire" />
+                        </div>
+                     </div>          
+                    </div>        
+            {{ form_end(reponsereplyForm) }}
+
+</div>
+    
+      
+	
+  </div>
+{% endblock %} 
+    

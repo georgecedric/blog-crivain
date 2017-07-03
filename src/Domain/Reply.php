@@ -4,28 +4,28 @@ namespace BlogJF\Domain;
 
 class Reply {
     /**
-     * Comment id.
+     * Reply id.
      *
      * @var integer
      */
     private $id;
 
    /**
-     * Comment author.
+     * Reply author.
      *
      * @var \BlogJF\Domain\User
      */
     private $author;
     
     /**
-     * Comment date.
+     * Reply date.
      *
      * @var datetime
      */
     private $date;
 
     /**
-     * Comment content.
+     * CReply content.
      *
      * @var integer
      */
@@ -38,11 +38,13 @@ class Reply {
     private $comment;
     
     /**
-     * Comment advert.
+     * Reply advert.
      *
      * @var integer
      */
     private $advert;
+    
+    private $reponse= array();
 
 
     public function getId() {
@@ -95,6 +97,16 @@ class Reply {
         $this->advert = $advert;
         return $this;
     }
+    public function getReponse() {
+        return $this->reponse;
+    }
+
+    public function addReponse(Reponsereply $reponsereply) {
+    
+     $this->reponse[] = $reponsereply;
+       return $this; 
+    }
+
 
     
 }

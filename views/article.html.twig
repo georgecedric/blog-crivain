@@ -1,117 +1,150 @@
-
 {% extends "layout.html.twig" %}
 
-{% block javascripts %}
-    <script type="text/javascript" src="{{asset('../lib/tiny_mce/tiny_mce.js')}}"></script>
-{% endblock %}
-
-
-{% block title %}{{ article.title }} {% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
-    <div class="row commentaire">
-
+<div class= "commentaire">
     <h2>{{ article.title }}</h2>
-    <p>{{ article.content | raw}}</p>
-    <h3>Commentaire</h3>
-        
-    {% for comment in comments %}
-  
-        <div class=" comment row ">
-         <div class=" row ">     
-                {% if comment.advert == NULL %}
-                  <div class="col-sm-1 text-center initiale "> 
-                      {{ comment.author|slice(0, 1) | upper }}
-                    <p>{{ comment.author}}</p>  
-                  </div>         
-                  <div class="col-sm-1   ">
-                        <span id="arrow_border"></span>
-                        
-                      </div> 
-             <div class="col-sm-10 contentcomment  ">
-                         à publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:<br>
-                      {{ comment.content | raw }}<br>
-                <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
-                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler le message  <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
-                  <form name="reply" method="post" onsubmit="return validerreponse()">
-          
-            <div class="form-group">
-                <p><h6> Entrez votre pseudo</h6></p>
-                
-                <textarea id="reply_author" name="reply[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea>
-                <p><h6>  Entrez votre réponse ici</h6></p>
-                
-                <textarea id="reply_content" name="reply[content]" required="required" rows="1" class="form-control" placeholder="Exprimez vous ici"></textarea><br>
-                         <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Répondre" />
-            </div><br>
-             
-                  </div> 
-            
-            </div>
+    <div class="row texte">
+        <div class="col-md-offset-2 col-sm-8">
+            <p> {{ article.content | raw}}</p><br/>
+        </div>
+    </div>
+ <!-- écrire un commentaire -->  
+    <div class=" comment">
+        <h2>Ecrire un commentaire</h2><br>
 
-            
-        </form>
-                
-            </div>
-                
+            {{ form_start(commentForm) }}
+                <div class="form-group">
+                    {{ form_errors(commentForm.author) }}
+                    {{ form_widget(commentForm.author, { 'attr':  {
+                        'rows': '1',
+                        'class': 'form-control',
+                        'placeholder': 'Enter votre nom et prenom'
+                    }}) }}<br>
+                    {{ form_errors(commentForm.content) }}
+                    {{ form_widget(commentForm.content, { 'attr':  {
+                        'rows': '4',
+                        'class': 'form-control',
+                        'placeholder': 'Entrer votre commentaire ici'
+                    }}) }}
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+                </div>
+            {{ form_end(commentForm) }}
+   </div>     
+  <!--  fin écriture d'un commentaire -->
     
-      
-      
-            <div class=" reponse row "> 
-                <h4>réponses au commentaire</h4>
-                {% for reply in comment.reponse %}
-                    <div class=" row ">
-                            <div class=" col-sm-2 col text-center initiale "> 
-                                {{ reply.author|slice(0, 1) | upper }}<br>
-                                <p>{{ reply.author}}</p>
-                            </div> 
+    
+    <div class=" comment">  
+        <h2>commentaires</h2><br>
+        {% for comment in comments %}
+        {% if comment.advert == NULL %}
+        <div class="comment">
+            <div class=" row ">
+                 <div class=" col-sm-7 ">   
+                     <div class="col-sm-1 text-center initiale "> 
+                         {{ comment.author|slice(0, 1) | upper }}
+                        
+                     </div>  
+                     <div class="col-sm-9 commentcontent">
+                     <p class= " texteitalic">{{ comment.author | upper}} a publié  le {{ comment.date |date('d-m-Y')   }} à {{ comment.date |date(' H:i:s ')   }}:</p><br>
+                      <p>  {{ comment.content | raw }}</p><br>
+
+                        <p><a class=" col-xs-4 col-sm-3 btn btn-info btn-sm" href="{{ path('advert', { 'id': comment.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-warning-sign"></span></a><a class="col-xs-offset-1 col-xs-4 col-sm-3 btn btn-info btn-sm" href="{{ path('reply', { 'id': comment.id }) }}" role="button">répondre <span class="glyphicon  glyphicon-hand-right"> </a></p><br>
+                    </div>  
+                 </div> 
+            
+            
+            <!-- liste des reponses a un commentaire -->
+            <div class=" col-sm-5 reponsebox">
+                
+                <h4>Réponses au commentaire de {{ comment.author}}</h4><br>
+            {% for reply in comment.reponse %}
+            
+              {% if reply.advert == NULL %}
+                            <div class=" reponsecontent ">  
+                        
+                                <p class= " texteitalic">{{ reply.author| upper}} a repondu  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:</p><br>
+                                <p>{{ reply.content}}</p><br>
+                                <p><a class=" col-xs-4  col-sm-3 btn btn-info btn-sm" href="{{ path('reponsereply', { 'id': reply.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
+                                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advertreply', { 'id': reply.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-warning-sign"></span></a></p><br>
+                            </div>
+                 
+                
+                
+               <!-- liste des reponses à une reponse -->    
+                  
+                        {% for reponsereply in reply.reponse %}  
+                      
+                          {% if reponsereply.advert == NULL %}
+                                           
+                 
+                            <div class=" col-xs-offset-1 reponsecontent">  
+                                  <p class= " texteitalic">{{ reponsereply.author| upper}} a publié  le {{ reponsereply.date |date('d-m-Y  ')   }} à {{ reponsereply.date |date(' H:i:s ')   }}:</p><br>
+                                <p>{{ reponsereply.content}}</p><br>
+                                <p>
+                                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('advertreponsereply', { 'id': reponsereply.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-warning-sign"></span></a></p><br>
+                            </div>
+                          {% else %}
+                        
                               
-                        
-                            <div class="col-sm-10  ">
-                                  à publié  le {{ reply.date |date('d-m-Y  ')   }} à {{ reply.date |date(' H:i:s ')   }}:<br>
-                                {{ reply.content}}<br>
-                                <p><a class=" col-xs-3  col-sm-2 btn btn-info btn-sm" href="{{ path('reply', { 'id': article.id,'commentid': comment.id }) }}" role="button"> Répondre  <span class="glyphicon  glyphicon-hand-right"></span></a>
-                <a class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-3 btn btn-info btn-sm" href="{{ path('replyadvert', { 'id': reply.id }) }}" role="button"> signaler <span class="glyphicon  glyphicon-hand-right"></span></a></p><br>
-               {{ form_start(replyForm) }}
-          
-            <div class="form-group">
-                <form name="reply" method="post">
-          
-            <div class="form-group">
-                <p><h6> Entrez votre pseudo</h6></p>
-                
-                <textarea id="reply_author" name="reply[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea>
-                <p><h6>  Entrez votre réponse ici</h6></p>
-                
-                <textarea id="reply_content" name="reply[content]" required="required" rows="1" class="form-control" placeholder="Exprimez vous ici"></textarea><br>
-                         <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Répondre" />
-            </div><br>
-             
-                  </div> 
-            
-            </div>
-
-            
-        </form>
-                            </div>
-                            </div>
-                        
-                            
-                        {% else %}
-          
-                            Pas encore de réponse.
-    
-    
+                               <div class=" row col-sm-11 advertissement">
+                                <div class="col-sm-2 ">                                     
+                                    <img src="{{ asset('../web/image/danger.png') }}"  alt="entete" />
+                                </div>
+                                <div class="col-sm-10">
+                                    Cette réponse a été signalé comme ne respectant pas la charte déontologique du site, il en attente de vérification par le modérateur du site
+                                </div>
+                               </div>
+                               
+                 
+                            {% endif %} 
+                          
+                      
                         {% endfor %}
-                             
-    
-
-            
-                 {% else %}
+                    
+               
+ <!-- fin de la liste des reponses à une reponse --> 
+                {% else %}
                         
-                              <div class="row">
+                              <div class="  col-sm-11 advertissement">
+                                <div class="col-sm-2 ">                                     
+                                    <img src="{{ asset('../web/image/danger.png') }}"  alt="entete" />
+                                </div>
+                                <div class="col-sm-10">
+                                    Cette réponse a été signalé comme ne respectant pas la charte déontologique du site, il en attente de vérification par le modérateur du site
+                                </div>
+                               </div>
+                 
+    {% endif %} 
+                
+                
+                
+                
+                
+                
+                
+                
+                  
+                  
+        {% else %}
+        <div class=" reponsecontent"> 
+            Pas encore de réponse
+        </div>    
+        {% endfor %}
+                </div> 
+          <!-- fin de la liste des reponses a un commentaire -->   
+                
+                
+                
+                
+        </div>
+            </div>
+        {% else %}
+                        
+                              <div class="row advertissement">
                                 <div class="col-sm-2">                                     
                                     <img src="{{ asset('../web/image/danger.png') }}"  alt="entete" />
                                 </div>
@@ -119,41 +152,26 @@
                                     Ce commentaire a été signalé comme ne respectant pas la charte déontologique du site, il en attente de vérification par le modérateur du site
                                 </div>
                                </div>
-                 {% endif %}
-             </div>    
-                    
-        </div>    
-    
-    
+                 
+    {% endif %}
         
-    {% else %}
-          
-        Pas encore de commentaire.
-       
-    {% endfor %}
-      
-        <div class=" comment">   
-
-            <h2>Ajouter un commentaire</h2><br>
+        
+        
+        
+        
+        
+        {% else %}
+        
+           <p> Pas encore de commentaire </p>
+        
+        
+        
+        
             
+        {% endfor %}
+           
+    
+   
+</div> 
 
-                       <form name="comment" method="post"
-                             onsubmit="return validercommentaire()">
-                     
-                            <div class="form-group">
-                                <p><h4> Entrez votre pseudo</h4></p>
-                                
-                                <textarea id="comment_author" name="comment[author]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom"></textarea><br>
-                                <p><h4>  Entrez votre commentaire ici</h4></p>
-                                
-                                <textarea id="comment_content" name="comment[content]" required="required" rows="4" class="form-control" placeholder="Exprimez vous ici"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Poster le commentaire" />
-                            </div>
-                        </form>
-         </div>          
-        </div>        
-
- 
-{% endblock %} 
+{% endblock %}

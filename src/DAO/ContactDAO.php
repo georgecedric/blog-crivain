@@ -43,11 +43,7 @@ class ContactDAO extends DAO
         $this->getDb()->delete('contact', array('contact_id' => $id));
     } 
     
-    
-    
-    
-    
-    
+   
     /**
      * Return a list of all articles, sorted by date (most recent first).
      *

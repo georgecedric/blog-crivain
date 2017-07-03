@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactType extends AbstractType
 {
@@ -15,7 +15,11 @@ class ContactType extends AbstractType
     {
       $builder  
 
-        ->add('title', TextType::class)
+        ->add('title', TextType::class,[
+            'constraints'=>[
+                new NotBlank()
+            ]
+        ])
         ->add('content', TextareaType::class)
         ->add('email', EmailType::class)
         ->add('author', TextType::class);

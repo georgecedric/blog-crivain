@@ -12,7 +12,7 @@ class Contact
     private $id;
 
    /**
-     * Comment author.
+     * Contact author.
      *
      * @var \BlogJF\Domain\Contact
      */

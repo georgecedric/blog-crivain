@@ -7,19 +7,38 @@
     <h2>Si vous désirez vous abonner à ma newsletter, c'est ici</h2><br>
     <div class="well ">
         <div class="col-sm-offset-8 ">
-        <form name="newsletter" method="post" onsubmit="return validernewsletter()">
-            <div class="form-group ">
-                <label for="newsletter_name" class="required">Nom : </label> 
-                <input type="text" id="newsletter_name" name="newsletter[name]" required="required" rows="1" class="form-control" placeholder="Entrez votre nom et prénom" /><br>    
-                <label for="newsletter_email" class="required">Email : </label>            
-                <input type="email" id="newsletter_email" name="newsletter[email]" required="required" rows="1" class="form-control" placeholder="Entrez votre email ici" required="required" /><br>                  
+        {{ form_start(newsletterForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(newsletterForm.name, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-8">
+                {{ form_errors(newsletterForm.name) }}
+                {{ form_widget(newsletterForm.name, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '1',
+                'placeholder': 'Entrez votre nom et prenom'
+                }}) }}
             </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(newsletterForm.email, null, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-8">
+        
+                {{ form_errors(newsletterForm.email) }}
+                {{ form_widget(newsletterForm.email, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '1',
+                'placeholder': 'Entrez votre email ici'
+                }}) }}
+         </div>
+    </div> 
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="s'abonner" />
             </div>
-         </form>
-         </div>
-    </div>      
+            {{ form_end(newsletterForm) }}
 </div>
 
 {% endblock %}
